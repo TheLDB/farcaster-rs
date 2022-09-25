@@ -10,6 +10,29 @@ pub struct NameRegistry {
 }
 
 impl Farcaster {
+    /// ### Used to get all V2 Name Registry Logs from the smart contract on Goerli
+    /// Smart Contract Address: ``0x4b1db9d8fcb29f3b1c33942b27ad4cbbb0806f9f``
+    /// 
+    /// ## Example
+    /// ```no_run
+    /// fn name_registry_example() -> Result<(), ProviderError> {
+    ///     let farcaster = Farcaster::new("Infura Connection String.to_string()");
+    ///     let name_registry = farcaster.get_name_registry_logs.await?;
+    /// }
+    /// ```
+    /// 
+    /// ## Return Type
+    /// ``Vec<NameRegistry>``
+    /// 
+    /// Name Registry Struct:
+    /// 
+    /// ```no_run
+    /// pub struct NameRegistry {
+    ///     pub event: ethers::core::types::Log,
+    ///     pub log_desc: ethers::abi::Log,
+    ///     pub fname: String
+    /// }
+    /// ``` 
     pub async fn get_name_registry_logs(self) -> Result<Vec<NameRegistry>, ProviderError> {
         let name_registry = "0x4b1db9d8fcb29f3b1c33942b27ad4cbbb0806f9f"
             .parse::<Address>()
