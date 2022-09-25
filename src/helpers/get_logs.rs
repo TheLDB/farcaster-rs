@@ -26,15 +26,12 @@ impl Farcaster {
                 Ok(success) => {
                     for i in success.params {
                         if i.name == "tokenId" {
-                            let ree = U256::from_token(i.value).unwrap();
-                            let aa = ree.encode();
-                            let aaa: &[u8] = &aa;
-                            let ree: &[u8;32] = aaa[0..32].try_into().unwrap();
-                            let test = parse_bytes32_string(ree).unwrap();
-                            println!("{}", test);
-                            // let value = U256::from(i.value.to_string().as_str());
-                            // println!("Token: {:?}", i.value);
-                            // println!("String: {}", i.value.to_string())
+                            let u256_token = U256::from_token(i.value).unwrap();
+                            let encoded_u256_token = u256_token.encode();
+                            let byte_u256_token: &[u8] = &encoded_u256_token;
+                            let byte_u256_token: &[u8;32] = byte_u256_token[0..32].try_into().unwrap();
+                            let fname = parse_bytes32_string(byte_u256_token).unwrap();
+                            println!("{}", fname);
                         }
                     }
                 }
