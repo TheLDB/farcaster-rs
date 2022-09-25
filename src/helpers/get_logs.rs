@@ -15,8 +15,11 @@ impl Farcaster {
         let test = self.provider.get_logs(&filter).await?;
         println!("{}", test.len());
         for event in test {
-            let topic = event.topics[3];
-            let topic = encode("44065893158610579695442735846418141283404106108805717173113286591224259543040");
+            // HOW DO I GET THE LOG DESCRIPTION
+            let log_desc = event.topics[3];
+            // PLEASE HELP
+
+            let topic = encode(log_desc);
             let aaaa = topic.as_bytes();
             let ree: &[u8;32] = &aaaa[0..32].try_into().unwrap();
             let test = parse_bytes32_string(ree).unwrap();
