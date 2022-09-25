@@ -24,7 +24,10 @@ impl Farcaster {
             match log_desc {
                 Ok(success) => {
                     for i in success.params {
-                        println!("name: {}, value: {}", i.name, i.value)
+                        if i.name == "tokenId" {
+                            println!("Token: {:?}", i);
+                            println!("String: {}", i.value.to_string())
+                        }
                     }
                 }
                 Err(e) => {
