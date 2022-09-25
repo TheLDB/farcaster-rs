@@ -9,3 +9,4 @@ edition = "2021"
 ethers = { git = "https://github.com/gakonst/ethers-rs" }
 serde_json = { version = "1.0.85" }
 hex = "0.4.3"
+primitive-types = "0.12.0"

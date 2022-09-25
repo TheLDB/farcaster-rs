@@ -1,7 +1,8 @@
 use ethers::{
     providers::{Middleware, ProviderError},
-    types::{Address, Filter, H256}, utils::{parse_bytes32_string, hex::encode}, abi::RawLog,
+    types::{Address, Filter, H256}, utils::{parse_bytes32_string, hex::encode}, abi::{RawLog, Token::Uint, Tokenizable, AbiEncode},
 };
+use ethers::types::U256;
 
 use crate::Farcaster;
 
@@ -25,8 +26,15 @@ impl Farcaster {
                 Ok(success) => {
                     for i in success.params {
                         if i.name == "tokenId" {
-                            println!("Token: {:?}", i);
-                            println!("String: {}", i.value.to_string())
+                            let ree = U256::from_token(i.value).unwrap();
+                            let aa = ree.encode();
+                            let aaa: &[u8] = &aa;
+                            let ree: &[u8;32] = aaa[0..32].try_into().unwrap();
+                            let test = parse_bytes32_string(ree).unwrap();
+                            println!("{}", test);
+                            // let value = U256::from(i.value.to_string().as_str());
+                            // println!("Token: {:?}", i.value);
+                            // println!("String: {}", i.value.to_string())
                         }
                     }
                 }
@@ -34,15 +42,6 @@ impl Farcaster {
                     println!("{}", e)
                 }
             }
-            // // HOW DO I GET THE LOG DESCRIPTION
-            // let log_desc = event.topics[3];
-            // // PLEASE HELP
-
-            // let topic = encode(log_desc);
-            // let aaaa = topic.as_bytes();
-            // let ree: &[u8;32] = &aaaa[0..32].try_into().unwrap();
-            // let test = parse_bytes32_string(ree).unwrap();
-            // println!("{:?}", test);
         }
 
         Ok(())
