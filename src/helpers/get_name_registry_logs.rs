@@ -2,6 +2,17 @@ use ethers::{providers::{ProviderError, Middleware}, types::{Address, Filter, U2
 
 use crate::Farcaster;
 
+/// ### NameRegistry Struct
+/// Used to return info for the ``get_nme_registry_logs()`` function
+/// 
+/// ## Example
+/// ```no_run
+/// let new_name_registry = NameRegistry {
+///     event: Some Log Here,
+///     log_desc: Some Parsed Log here,
+///     fname: A string
+/// }
+/// ```
 #[derive(Debug)]
 pub struct NameRegistry {
     pub event: Log,
