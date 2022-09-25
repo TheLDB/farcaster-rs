@@ -1,6 +1,6 @@
 use ethers::{
     providers::{Middleware, ProviderError},
-    types::{Address, Filter, H256}, utils::{parse_bytes32_string, hex::encode},
+    types::{Address, Filter, H256}, utils::{parse_bytes32_string, hex::encode}, abi::RawLog,
 };
 
 use crate::Farcaster;
@@ -15,15 +15,31 @@ impl Farcaster {
         let test = self.provider.get_logs(&filter).await?;
         println!("{}", test.len());
         for event in test {
-            // HOW DO I GET THE LOG DESCRIPTION
-            let log_desc = event.topics[3];
-            // PLEASE HELP
+            let raw_log = RawLog {
+                topics: event.topics,
+                data: event.data.to_vec()
+            };
 
-            let topic = encode(log_desc);
-            let aaaa = topic.as_bytes();
-            let ree: &[u8;32] = &aaaa[0..32].try_into().unwrap();
-            let test = parse_bytes32_string(ree).unwrap();
-            println!("{:?}", test);
+            let log_desc = self.abi.event("Transfer").unwrap().parse_log(raw_log);
+            match log_desc {
+                Ok(success) => {
+                    for i in success.params {
+                        println!("name: {}, value: {}", i.name, i.value)
+                    }
+                }
+                Err(e) => {
+                    println!("{}", e)
+                }
+            }
+            // // HOW DO I GET THE LOG DESCRIPTION
+            // let log_desc = event.topics[3];
+            // // PLEASE HELP
+
+            // let topic = encode(log_desc);
+            // let aaaa = topic.as_bytes();
+            // let ree: &[u8;32] = &aaaa[0..32].try_into().unwrap();
+            // let test = parse_bytes32_string(ree).unwrap();
+            // println!("{:?}", test);
         }
 
         Ok(())
