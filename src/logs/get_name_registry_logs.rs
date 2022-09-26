@@ -3,7 +3,7 @@ use ethers::{
     types::{Address, Filter, Log, H256},
 };
 
-use crate::Farcaster;
+use crate::{Farcaster};
 
 /// ### NameRegistry Struct
 /// Used to return info for the ``get_nme_registry_logs()`` function
@@ -24,29 +24,6 @@ pub struct NameRegistry {
 }
 
 impl Farcaster {
-    /// ### Used to get all V2 Name Registry Logs from the smart contract on Goerli
-    /// Smart Contract Address: ``0x4b1db9d8fcb29f3b1c33942b27ad4cbbb0806f9f``
-    ///
-    /// ## Example
-    /// ```no_run
-    /// fn name_registry_example() -> Result<(), ProviderError> {
-    ///     let farcaster = Farcaster::new("Infura Connection String.to_string()");
-    ///     let name_registry = farcaster.get_name_registry_logs.await?;
-    /// }
-    /// ```
-    ///
-    /// ## Return Type
-    /// ``Vec<NameRegistry>``
-    ///
-    /// Name Registry Struct:
-    ///
-    /// ```no_run
-    /// pub struct NameRegistry {
-    ///     pub event: ethers::core::types::Log,
-    ///     pub log_desc: ethers::abi::Log,
-    ///     pub fname: String
-    /// }
-    /// ```
     pub async fn get_name_registry_logs(&self) -> Result<Vec<Log>, ProviderError> {
         let name_registry = "0xe3be01d99baa8db9905b33a3ca391238234b79d1"
             .parse::<Address>()
