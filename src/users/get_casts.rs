@@ -1,5 +1,6 @@
 use crate::{Farcaster, types::casts::{Root}};
 
+#[allow(unreachable_code)]
 impl Farcaster {
     pub async fn get_casts(&self, username: String, casts_per_page: i64, page: i64) -> Result<Root, Box<dyn std::error::Error>> {
         let user = Farcaster::get_user_by_username(self, username).await.unwrap();
@@ -21,5 +22,7 @@ impl Farcaster {
         else {
             return Ok(casts)
         }
+
+        Err(Box::from("This error should be unreachable - if you got here either I fucked up or you fucked up"))
     }
 }
