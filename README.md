@@ -91,6 +91,8 @@ Log {
 ```rust
 use farcaster_rs::abi::get_registry_abi::Registry; // Registry is an enum with NAME and ID for the different registry types
 use farcaster_rs::Farcaster;
+// * Enum, has Transfer & Register
+use farcaster_rs::types::events::Events;
 
 #[tokio::main]
 async fn main() {
@@ -99,7 +101,7 @@ async fn main() {
 
     for i in name_registry_logs {
         let parsed_log = farcaster
-            .parse_log(i, Registry::NAME, "Transfer")
+            .parse_log(i, Registry::NAME, Events::Transfer)
             .await
             .unwrap();
 
