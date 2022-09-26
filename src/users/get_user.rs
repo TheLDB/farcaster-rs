@@ -4,7 +4,7 @@ use crate::types::user::Root;
 use crate::types::{events::Events};
 
 impl Farcaster {
-    pub async fn get_user_by_username(self, username: String) -> Result<Root, Box<dyn std::error::Error>> {
+    pub async fn get_user_by_username(&self, username: String) -> Result<Root, Box<dyn std::error::Error>> {
         let name_registry_logs = self.get_name_registry_logs().await.unwrap();
 
         for name in name_registry_logs {
