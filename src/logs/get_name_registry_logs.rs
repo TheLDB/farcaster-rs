@@ -5,24 +5,6 @@ use ethers::{
 
 use crate::{Farcaster};
 
-/// ### NameRegistry Struct
-/// Used to return info for the ``get_nme_registry_logs()`` function
-///
-/// ## Example
-/// ```no_run
-/// let new_name_registry = NameRegistry {
-///     event: Some Log Here,
-///     log_desc: Some Parsed Log here,
-///     fname: A string
-/// }
-/// ```
-#[derive(Debug)]
-pub struct NameRegistry {
-    pub event: Log,
-    pub log_desc: ethers::abi::Log,
-    pub fname: String,
-}
-
 impl Farcaster {
     pub async fn get_name_registry_logs(&self) -> Result<Vec<Log>, ProviderError> {
         let name_registry = "0xe3be01d99baa8db9905b33a3ca391238234b79d1"
