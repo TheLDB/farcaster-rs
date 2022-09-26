@@ -1,8 +1,7 @@
 use ethers::{
-    abi::{AbiEncode, RawLog, Tokenizable},
+    abi::RawLog,
     providers::{Middleware, ProviderError},
-    types::{Address, Filter, Log, H256, U256},
-    utils::parse_bytes32_string,
+    types::{Address, Filter, Log, H256}
 };
 
 use crate::Farcaster;
@@ -58,9 +57,9 @@ impl Farcaster {
             .parse::<H256>()
             .unwrap();
 
-        let transfer_topic = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
-            .parse::<H256>()
-            .unwrap();
+        // let transfer_topic = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+        //     .parse::<H256>()
+        //     .unwrap();
 
         let filter = Filter::new()
             .select(1337u64..)
@@ -74,7 +73,7 @@ impl Farcaster {
         for event in logs {
             println!("hi!");
             let register_log = event.clone();
-            let transfer_log = event.clone();
+            // let transfer_log = event.clone();
 
             let register_log = RawLog {
                 topics: register_log.topics,

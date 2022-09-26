@@ -2,6 +2,7 @@ use ethers::{core::{types::Address, abi::Abi}, providers::{Provider, Http}};
 pub mod logs;
 pub mod abi;
 pub mod users;
+pub mod types;
 use abi::get_registry_abi::{Registry, get_registry_abi};
 
 #[derive(Debug)]

@@ -8,5 +8,5 @@ edition = "2021"
 [dependencies]
 ethers = { git = "https://github.com/gakonst/ethers-rs" }
 serde_json = { version = "1.0.85" }
-hex = "0.4.3"
-primitive-types = "0.12.0"
+reqwest = "0.11.12"
+serde = "1.0.145"
