@@ -5,48 +5,7 @@ use ethers::{
 
 use crate::Farcaster;
 
-/// ### NameRegistry Struct
-/// Used to return info for the ``get_nme_registry_logs()`` function
-///
-/// ## Example
-/// ```no_run
-/// let new_name_registry = NameRegistry {
-///     event: Some Log Here,
-///     log_desc: Some Parsed Log here,
-///     fname: A string
-/// }
-/// ```
-#[derive(Debug)]
-pub struct NameRegistry {
-    pub event: Log,
-    pub log_desc: ethers::abi::Log,
-    pub fname: String,
-}
-
 impl Farcaster {
-    /// ### Used to get all V2 ID Registry Logs from the smart contract on Goerli
-    /// Smart Contract Address: ``0x4b1db9d8fcb29f3b1c33942b27ad4cbbb0806f9f``
-    ///
-    /// ## Example
-    /// ```no_run
-    /// fn name_registry_example() -> Result<(), ProviderError> {
-    ///     let farcaster = Farcaster::new("Infura Connection String.to_string()");
-    ///     let name_registry = farcaster.get_name_registry_logs.await?;
-    /// }
-    /// ```
-    ///
-    /// ## Return Type
-    /// ``Vec<NameRegistry>``
-    ///
-    /// Name Registry Struct:
-    ///
-    /// ```no_run
-    /// pub struct NameRegistry {
-    ///     pub event: ethers::core::types::Log,
-    ///     pub log_desc: ethers::abi::Log,
-    ///     pub fname: String
-    /// }
-    /// ```
     pub async fn get_id_registry_logs(self) -> Result<Vec<Log>, ProviderError> {
         let id_registry = "0xda107a1caf36d198b12c16c7b6a1d1c795978c42"
             .parse::<Address>()
