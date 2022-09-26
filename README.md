@@ -11,7 +11,7 @@ This project was built to:
 - Build a fun project
 - Have a nice way to interact w/ Farcaster for future projects
 
-## Example Usage
+# Example Usage
 There are extensive docs on the docs.rs page (link once finished)
 
 # Get a user's info by their @
