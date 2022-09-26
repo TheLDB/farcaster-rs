@@ -15,6 +15,6 @@ impl Farcaster {
             }
         }
 
-        Err(Box::from("No logs found?"))
+        Err(Box::from("Unable to fetch Name Registry Logs - Fatal Error"))
     }
 }

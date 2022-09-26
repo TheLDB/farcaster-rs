@@ -70,7 +70,7 @@ impl Farcaster {
                 data: raw_log_clone.data.to_vec(),
             };
 
-            let log_desc = self.abi.event("Transfer").unwrap().parse_log(raw_log);
+            let log_desc = self.name_registry_abi.event("Transfer").unwrap().parse_log(raw_log);
             match log_desc {
                 Ok(success) => {
                     for i in &success.params {

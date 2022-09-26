@@ -25,7 +25,7 @@ pub struct NameRegistry {
 }
 
 impl Farcaster {
-    /// ### Used to get all V2 Name Registry Logs from the smart contract on Goerli
+    /// ### Used to get all V2 ID Registry Logs from the smart contract on Goerli
     /// Smart Contract Address: ``0x4b1db9d8fcb29f3b1c33942b27ad4cbbb0806f9f``
     ///
     /// ## Example
@@ -49,7 +49,7 @@ impl Farcaster {
     /// }
     /// ```
     pub async fn get_id_registry_logs(self) -> Result<(), ProviderError> {
-        let id_registry = "0xb30fb6baa3782ae8f00ea0d40e72483b098f5cb2"
+        let id_registry = "0xda107a1caf36d198b12c16c7b6a1d1c795978c42"
             .parse::<Address>()
             .unwrap();
             
@@ -57,9 +57,9 @@ impl Farcaster {
             .parse::<H256>()
             .unwrap();
 
-        // let transfer_topic = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
-        //     .parse::<H256>()
-        //     .unwrap();
+        let transfer_topic = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+            .parse::<H256>()
+            .unwrap();
 
         let filter = Filter::new()
             .select(1337u64..)
@@ -85,7 +85,7 @@ impl Farcaster {
             //     data: transfer_log.data.to_vec()
             // };
 
-            let register_logs = self.abi.event("Register").unwrap().parse_log(register_log).unwrap();
+            let register_logs = self.id_registry_abi.event("Register").unwrap().parse_log(register_log).unwrap();
             println!("=========== Register Log ===========");
             println!("{:?}", register_logs);
 
