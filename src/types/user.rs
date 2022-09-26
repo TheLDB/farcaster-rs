@@ -25,7 +25,7 @@ pub struct User {
     pub is_viewer_following: bool,
     pub is_following_viewer: bool,
     pub profile: Profile,
-    pub referrer_username: String,
+    pub referrer_username: Option<String>,
     pub viewer_can_send_direct_casts: bool,
 }
 
