@@ -50,7 +50,7 @@ impl Farcaster {
     /// }
     /// ```
     pub async fn get_name_registry_logs(self) -> Result<Vec<NameRegistry>, ProviderError> {
-        let name_registry = "0x4b1db9d8fcb29f3b1c33942b27ad4cbbb0806f9f"
+        let name_registry = "0xe3be01d99baa8db9905b33a3ca391238234b79d1"
             .parse::<Address>()
             .unwrap();
         let transfer_topic = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
@@ -75,6 +75,7 @@ impl Farcaster {
                 Ok(success) => {
                     for i in &success.params {
                         if i.name == "tokenId" {
+
                             let u256_token = U256::from_token(i.value.clone()).unwrap();
                             let encoded_u256_token = u256_token.encode();
                             let byte_u256_token: &[u8] = &encoded_u256_token;
