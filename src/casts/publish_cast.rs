@@ -1,12 +1,13 @@
+use ethers::{signers::Wallet, prelude::k256::ecdsa::SigningKey};
+
 use crate::Farcaster;
 
-async fn auth_header() -> String {
+async fn _auth_header() -> String {
     "aaaa".to_string()
 }
 impl Farcaster {
-    pub async fn publish_cast(&self) -> Result<(), Box<dyn std::error::Error>> {
-        let test = auth_header().await;
-        println!("{}", test);
+    pub async fn publish_cast(wallet: Wallet<SigningKey>) -> Result<(), Box<dyn std::error::Error>> {
+        println!("{:?}", wallet);
         Ok(())
     }
 }

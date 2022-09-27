@@ -22,14 +22,15 @@ impl Farcaster {
                 let word_count: usize = word_count.try_into().unwrap();
                 let wallet = MnemonicBuilder::<English>::default()
                     .word_count(word_count)
+                    .phrase(key.as_str())
                     .build();
-                
+
                 match wallet {
                     Ok(success) => {
                         Ok(success)
                     }
                     Err(e) => {
-                        Err(Box::from(format!("Unable to build Mnemonic phrase into wallet. Error: {:?}", e)))
+                        Err(Box::from(format!("Unable to build Mnemonic phrase into new wallet. Error: {:?}", e)))
                     }
                 }
             }
