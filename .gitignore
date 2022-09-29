@@ -1,3 +1,6 @@
-/target
-/Cargo.lock
+# Cache
 .idea
+/Cargo.lock
+
+# Build Files
+/target
