@@ -4,7 +4,6 @@ pub mod abi;
 pub mod users;
 pub mod types;
 pub mod casts;
-use abi::get_registry_abi::get_registry_abi;
 use types::abi::registry::Registry;
 
 #[derive(Debug)]
@@ -18,9 +17,9 @@ pub struct Farcaster {
 impl Farcaster {
     pub fn new(client: String) -> Self {
         let address = "0xe3be01d99baa8db9905b33a3ca391238234b79d1".parse::<Address>().unwrap();
-        let name_abi_str = get_registry_abi(Registry::NAME).unwrap();
+        let name_abi_str = Farcaster::get_registry_abi(Registry::NAME).unwrap();
         let name_abi: Abi = serde_json::from_str(name_abi_str).unwrap();
-        let id_abi_str = get_registry_abi(Registry::ID).unwrap();
+        let id_abi_str = Farcaster::get_registry_abi(Registry::ID).unwrap();
         let id_abi: Abi = serde_json::from_str(id_abi_str).unwrap();
         let client = Provider::<Http>::try_from(client).unwrap();
 
