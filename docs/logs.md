@@ -5,9 +5,9 @@ What is the logs module?
 Logs harbors all the functions that are associated with ID & Name registry events/logs on the new Farcaster V2 Goerli contracts
 
 ## Functions:
-- [Get ID Registry Logs](/)
-- [Get Name Registry Logs](/)
-- [Parse a log to get the underlying args](/)
+- [Get ID Registry Logs](#get-id-registry-logs)
+- [Get Name Registry Logs](#get-name-registry-logs)
+- [Parse a log to get the underlying args](#parse-a-log)
 
 
 # Example Usage
@@ -164,4 +164,3 @@ Log {
     ],
 }
 ```
-
