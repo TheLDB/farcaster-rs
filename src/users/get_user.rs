@@ -1,7 +1,7 @@
 use crate::Farcaster;
 use crate::abi::get_registry_abi::Registry;
-use crate::types::user::Root;
-use crate::types::{events::Events};
+use crate::types::user::user::Root;
+use crate::types::{logs::events::Events};
 
 impl Farcaster {
     pub async fn get_user_by_username(&self, username: String) -> Result<Root, Box<dyn std::error::Error>> {

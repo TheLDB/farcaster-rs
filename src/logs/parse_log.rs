@@ -3,7 +3,7 @@ use ethers::{types::Log, abi::RawLog};
 
 use crate::{Farcaster, abi::get_registry_abi::Registry};
 
-use crate::types::events::Events;
+use crate::types::logs::events::Events;
 
 impl Farcaster {
     pub async fn parse_log(&self, log: Log, abi: Registry, event: Events) -> Result<ethers::abi::Log, Box<dyn std::error::Error>> {

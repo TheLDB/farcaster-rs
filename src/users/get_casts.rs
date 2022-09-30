@@ -1,4 +1,4 @@
-use crate::{Farcaster, types::casts::{Root}};
+use crate::{Farcaster, types::casts::casts::{Root}};
 
 #[allow(unreachable_code)]
 impl Farcaster {

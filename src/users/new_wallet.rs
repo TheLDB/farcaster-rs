@@ -1,6 +1,6 @@
 use ethers::{signers::{LocalWallet, MnemonicBuilder, coins_bip39::English, Wallet}, prelude::k256::ecdsa::SigningKey};
 
-use crate::{Farcaster, types::key_type::KeyType};
+use crate::{Farcaster, types::wallet::key_type::KeyType};
 
 impl Farcaster {
     pub async fn new_wallet(key_type: KeyType, key: String, mnemonic_word_count: Option<i64>) -> Result<Wallet<SigningKey>, Box<dyn std::error::Error>> {

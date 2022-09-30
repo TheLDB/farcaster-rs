@@ -1,4 +1,4 @@
-use crate::{Farcaster, types::verified_address::{self, Root}};
+use crate::{Farcaster, types::user::verified_address::{self, Root}};
 
 impl Farcaster {
     pub async fn get_verified_address(&self, username: String) -> Result<Root, Box<dyn std::error::Error>> {
