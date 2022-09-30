@@ -22,8 +22,6 @@ To view Users documentation, go [here](./docs/users.md)
 - Get a specific users casts (pagination supported)
 - Get a users verified address
 - Get a users info
-- Create a new wallet (will integrate with Casts eventually)
-- Convert a TokenID to fname
 - & More (eventually)
 
 To view ABI documentation, go [here](./docs/abi.md)

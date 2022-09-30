@@ -1,4 +1,4 @@
-# farcaster-rs Logs
+# farcaster-rs Logs Documentation
 
 What is the logs module?
 

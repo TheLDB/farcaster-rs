@@ -6,7 +6,7 @@ use ethers::{
 use crate::Farcaster;
 
 impl Farcaster {
-    pub async fn get_id_registry_logs(self) -> Result<Vec<Log>, ProviderError> {
+    pub async fn get_id_registry_logs(&self) -> Result<Vec<Log>, ProviderError> {
         let id_registry = "0xda107a1caf36d198b12c16c7b6a1d1c795978c42"
             .parse::<Address>()
             .unwrap();
