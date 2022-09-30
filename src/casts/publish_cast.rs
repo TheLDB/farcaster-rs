@@ -11,6 +11,8 @@ async fn auth_header(wallet: Wallet<SigningKey>) -> Result<String, Box<dyn std::
     let _expiry_time = current_time + 60;
 
     // *Retrieve the private key - ??????
+    let key: &SigningKey = wallet.signer();
+    println!("{:?}", key);
 
     // * Sign the private key with ES256K - ???????
 
