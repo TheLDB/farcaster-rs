@@ -1,18 +1,23 @@
-use ethers::{signers::Wallet, prelude::k256::ecdsa::SigningKey};
+use ethers::{signers::{Wallet, Signer}, prelude::k256::ecdsa::SigningKey};
+use chrono::offset::Utc;
 use crate::Farcaster;
 
-async fn auth_header(_wallet: Wallet<SigningKey>) {
+async fn auth_header(wallet: Wallet<SigningKey>) -> Result<String, Box<dyn std::error::Error>> {
     // * Retrieve Address
+    let _address = wallet.address();
 
     // * Create an expiry date 60 seconds ahead
+    let current_time = Utc::now().timestamp();
+    let _expiry_time = current_time + 60;
 
-    // * Retrieve the private key
+    // *Retrieve the private key - ??????
 
-    // * Sign the private key with ES256K
+    // * Sign the private key with ES256K - ???????
 
-    // * Sign a JWT with the signer from above, and the ES256 header
+    // * Sign a JWT with the signer from above, and the ES256 header - ???????
 
     // * Return JWT
+    Ok(String::from("???????"))
 }
 
 impl Farcaster {
