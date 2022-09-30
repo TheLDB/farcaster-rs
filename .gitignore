@@ -1,6 +1,7 @@
 # Cache
 .idea
 /Cargo.lock
+.DS_Store
 
 # Build Files
 /target
