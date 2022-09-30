@@ -1,8 +1,4 @@
-#[derive(Debug)]
-pub enum Registry {
-    ID,
-    NAME
-}
+use crate::types::abi::registry::Registry;
 
 pub fn get_registry_abi(registry: Registry) -> Option<&'static str> {
     match registry {

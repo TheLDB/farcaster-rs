@@ -4,7 +4,8 @@ pub mod abi;
 pub mod users;
 pub mod types;
 pub mod casts;
-use abi::get_registry_abi::{Registry, get_registry_abi};
+use abi::get_registry_abi::get_registry_abi;
+use types::abi::registry::Registry;
 
 #[derive(Debug)]
 pub struct Farcaster {

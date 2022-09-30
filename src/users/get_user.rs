@@ -1,5 +1,5 @@
 use crate::Farcaster;
-use crate::abi::get_registry_abi::Registry;
+use crate::types::abi::registry::Registry;
 use crate::types::user::user::Root;
 use crate::types::{logs::events::Events};
 

@@ -1,7 +1,7 @@
 
 use ethers::{types::Log, abi::RawLog};
 
-use crate::{Farcaster, abi::get_registry_abi::Registry};
+use crate::{Farcaster, types::abi::registry::Registry};
 
 use crate::types::logs::events::Events;
 
