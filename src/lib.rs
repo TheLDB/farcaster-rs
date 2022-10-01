@@ -6,8 +6,20 @@
 //! # Example Usage
 //! 
 //! * To view Logs documentation, go:
-//!     - [here](https://github.com/TheLDB/farcaster-rs) for GitHub examples
+//!     - [here](https://github.com/TheLDB/farcaster-rs/blob/main/docs/logs.md) for GitHub examples
+//!     - [or here](./logs/index.html) for docs.rs documentation
+//! 
+//! * To view ABI documentation, go:
+//!     - [here](https://github.com/TheLDB/farcaster-rs/blob/main/docs/abi.md) for GitHub examples
 //!     - [or here](./abi/index.html) for docs.rs documentation
+//! 
+//! * To view Types documentation, go:
+//!     - [here](./types/index.html) for docs.rs documentation
+//! 
+//! * To view Users documentation, go:
+//!     - [here](https://github.com/TheLDB/farcaster-rs/blob/main/docs/users.md) for GitHub documentation
+//!     - [or here](./users/index.html) for docs.rs documentation
+//! 
 
 
 use ethers::{core::{types::Address, abi::Abi}, providers::{Provider, Http}};
@@ -18,6 +30,7 @@ pub mod types;
 pub mod casts;
 use types::abi::registry::Registry;
 
+/// The Farcaster type that holds the keys to the castle - so to speak :)
 #[derive(Debug)]
 pub struct Farcaster {
     pub address: Address,
