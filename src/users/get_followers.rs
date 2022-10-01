@@ -13,6 +13,7 @@ impl Farcaster {
             res_address = address.unwrap();
         }
         else {
+            return Err(Box::from("Please provide either a username or an address"));
             // Error
         }
         let follower_request = reqwest::get(format!("https://api.farcaster.xyz/indexer/followers/{}", res_address)).await.unwrap().text().await.unwrap();
