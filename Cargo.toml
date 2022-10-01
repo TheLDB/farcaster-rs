@@ -17,4 +17,3 @@ serde = "1.0.145"
 chrono = "0.4"
 jsonwebtoken = "8"
 serde_cbor = "0.11.1"
-jwt-compact = { version="0.5.0", features=["es256k"]}
