@@ -1,6 +1,7 @@
 use crate::{Farcaster, types::user::followers::{FollowerRoot, Follower}};
 use std::result::Result;
 
+#[allow(unused_assignments)]
 impl Farcaster {
     pub async fn get_followers(&self, username: Option<String>, address: Option<String>) -> Result<Vec<Follower>, Box<dyn std::error::Error>> {
         let mut res_address: String = "".to_string();

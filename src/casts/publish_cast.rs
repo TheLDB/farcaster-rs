@@ -1,8 +1,6 @@
 use ethers::{signers::{Wallet, Signer}, prelude::k256::ecdsa::SigningKey};
 use chrono::offset::Utc;
-use jwt_compact::{TimeOptions, alg::Es256k};
 use crate::Farcaster;
-use serde::{Deserialize, Serialize};
 
 // #[derive(Debug, PartialEq, Serialize, Deserialize)]
 // pub struct CustomClaims {
@@ -18,10 +16,9 @@ async fn auth_header(wallet: Wallet<SigningKey>) -> Result<String, Box<dyn std::
     let _expiry_time = current_time + 60;
 
     // // *Retrieve the private key - ??????
-    let key: &SigningKey = wallet.signer();
+    let _key: &SigningKey = wallet.signer();
 
     // // * Sign a JWT with the signer from above, and the ES256 header - ???????
-    let time_options = TimeOptions::default();
 
     // let key = Es256k::new(key);
     // // * Return JWT
