@@ -16,7 +16,7 @@ use serde::{Deserialize, Serialize};
 ///         - There might be a better/faster way to do this though, so please play around with it!
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
-pub struct Root {
+pub struct CastRoot {
     pub result: Result,
     pub meta: Meta2,
 }

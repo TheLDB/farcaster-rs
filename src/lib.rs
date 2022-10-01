@@ -20,15 +20,31 @@
 //!     - [here](https://github.com/TheLDB/farcaster-rs/blob/main/docs/users.md) for GitHub documentation
 //!     - [or here](./users/index.html) for docs.rs documentation
 //! 
+//! # Get Started
+//! 
+//! ```
+//! // First, you'll need a RPC node to connect to, I use infura.io
+//! 
+//! use farcaster_rs::Farcaster;
+//! 
+//! #[tokio::main]
+//! async fn main() {
+//!     let farcaster = Farcaster::new("https://goerli.infura.io/v3/{key}");
+//! 
+//!     // Get a users info
+//!     let user = farcaster.get_user_by_username("dwr".to_string()).await.unwrap();
+//! 
+//!     println!("{:#?}", user);
+//! }
 
 
 use ethers::{core::{types::Address, abi::Abi}, providers::{Provider, Http}};
+use types::abi::registry::Registry;
 pub mod logs;
 pub mod abi;
-pub mod users;
 pub mod types;
+pub mod users;
 pub mod casts;
-use types::abi::registry::Registry;
 
 /// The Farcaster type that holds the keys to the castle - so to speak :)
 #[derive(Debug)]
@@ -38,6 +54,7 @@ pub struct Farcaster {
     pub id_registry_abi: Abi,
     pub provider: Provider<Http>
 }
+
 
 impl Farcaster {
     pub fn new(client: String) -> Self {

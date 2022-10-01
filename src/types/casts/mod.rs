@@ -13,3 +13,4 @@
 ///     - To use pagination on your own, I just looped through it x times until I reached the correct number.
 ///         - There might be a better/faster way to do this though, so please play around with it!
 pub mod casts;
+pub use self::casts::CastRoot;

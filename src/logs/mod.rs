@@ -2,6 +2,10 @@
 
 /// ## Get all of the ID Registry Logs from the FC V2 smart contracts on Goerli
     /// 
+    /// ```
+    /// pub async fn get_id_registry_logs(&self) -> Result<Vec<Log>, Box<dyn std::error::Error>>
+    /// ```
+    /// 
     /// ## Arguments
     /// 
     /// * `&self`: &Farcaster
@@ -29,6 +33,10 @@ pub mod get_id_registry_logs;
 
 /// ## Get all of the Name Registry Logs from the FC V2 smart contracts on Goerli
     /// 
+    /// ```
+    /// pub async fn get_name_registry_logs(&self) -> Result<Vec<Log>, Box<dyn std::error::Error>>
+    /// ```
+    /// 
     /// ## Arguments
     /// 
     /// * `&self`: &Farcaster
@@ -55,6 +63,10 @@ pub mod get_id_registry_logs;
 pub mod get_name_registry_logs;
 
 /// ## Parse an Ethers log to get the inner arguments for the event
+    /// 
+    /// ```
+    /// pub async fn get_name_registry_logs(&self) -> Result<Vec<Log>, Box<dyn std::error::Error>>
+    /// ```
     /// 
     /// ## Arguments
     /// 

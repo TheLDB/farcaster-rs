@@ -6,6 +6,10 @@ impl Farcaster {
     /// 
     /// Get either the ID or Name registry ABI's (for the FC V2 smart contracts on Goerli)
     /// 
+    /// ```
+    /// pub fn get_registry_abi(registry: Registry) -> Option<&'static str>
+    /// ```
+    /// 
     /// ## Arguments
     /// 
     /// * `registry`: types::abi::registry::Registry

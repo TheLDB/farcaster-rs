@@ -2,6 +2,10 @@
 
 /// # Get the details of a user
     /// 
+    /// ```
+    /// pub async fn get_user_by_username(&self, username: String) -> Result<Root, Box<dyn std::error::Error>>
+    /// ```
+    /// 
     /// ## Arguments
     /// 
     /// * `self: &Farcaster`
@@ -20,6 +24,10 @@
     /// print
 pub mod get_user;
  /// # Convert a FC V2 token to an fname (username)
+    /// 
+    /// ```
+    /// pub async fn token_to_fname(token: Token) -> Result<String, Box<dyn std::error::Error>>
+    /// ```
     /// 
     /// ## Arguments
     /// 
@@ -42,6 +50,10 @@ pub mod get_user;
 pub mod token_to_fname;
 /// # Get the verified address of a user
     /// 
+    /// ```
+    /// pub async fn get_verified_address(&self, username: String) -> Result<Root, Box<dyn std::error::Error>>
+    /// ```
+    /// 
     /// ## Arguments
     /// 
     /// * `self: &Farcaster`
@@ -62,6 +74,10 @@ pub mod token_to_fname;
 pub mod get_verified_address;
 /// # Get all Casts of a user
     /// With pagination!
+    /// 
+    /// ```
+    /// pub async fn get_casts(&self, username: String, casts_per_page: i64, page: i64) -> Result<CastRoot, Box<dyn std::error::Error>>
+    /// ```
     /// 
     /// ## Arguments
     /// 
@@ -88,6 +104,10 @@ pub mod get_verified_address;
 pub mod get_casts;
 /// # Create a new wallet
     /// 
+    /// ```
+    /// pub async fn new_wallet(key_type: KeyType, key: String, mnemonic_word_count: Option<i64>) -> Result<Wallet<SigningKey>, Box<dyn std::error::Error>>
+    /// ```
+    /// 
     /// ## Arguments
     /// 
     /// * `key_type: KeyType`
@@ -108,6 +128,10 @@ pub mod get_casts;
     /// ```
 pub mod new_wallet;
 /// # Get all notifications of a user
+    /// 
+    /// ```
+    /// pub async fn get_notifications(&self, username: Option<String>, address: Option<String>, page: i64) -> Result<NotifRoot, Box<dyn std::error::Error>>
+    /// ```
     /// 
     /// ## Arguments
     /// 
@@ -132,6 +156,10 @@ pub mod new_wallet;
     /// ```
 pub mod get_notifications;
 /// # Get all followers of a user
+    /// 
+    /// ```
+    /// pub async fn get_followers(&self, username: Option<String>, address: Option<String>) -> Result<Vec<Follower>, Box<dyn std::error::Error>>
+    /// ```
     /// 
     /// ## Arguments
     /// 
