@@ -1,3 +1,5 @@
+//! Contains all of the log related functions (get/parse)
+
 /// ## Get all of the ID Registry Logs from the FC V2 smart contracts on Goerli
     /// 
     /// ## Arguments

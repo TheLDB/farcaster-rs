@@ -20,7 +20,7 @@ impl Farcaster {
     ///     - What page number you get.
     /// 
     /// ## Usage
-    /// ```
+    /// ```no_run
     /// let farcaster = Farcaster::new("".to_string());
     /// 
     /// let casts = farcaster.get_casts("dwr".to_string(), 30, 2).await.unwrap();

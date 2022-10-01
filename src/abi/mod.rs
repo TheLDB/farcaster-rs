@@ -1,3 +1,5 @@
+//! Contains all of the ABI/Registry ABI related functions
+
 /// ## Get 1 of the two Registry ABIs
     /// 
     /// Get either the ID or Name registry ABI's (for the FC V2 smart contracts on Goerli)
