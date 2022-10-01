@@ -4,10 +4,10 @@ use jwt_compact::{TimeOptions, alg::Es256k};
 use crate::Farcaster;
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
-pub struct CustomClaims {
-    pub issuer: &'static SigningKey
-}
+// #[derive(Debug, PartialEq, Serialize, Deserialize)]
+// pub struct CustomClaims {
+//     pub issuer: &'static SigningKey
+// }
 
 async fn auth_header(wallet: Wallet<SigningKey>) -> Result<String, Box<dyn std::error::Error>> {
     // // * Retrieve Address
@@ -23,7 +23,7 @@ async fn auth_header(wallet: Wallet<SigningKey>) -> Result<String, Box<dyn std::
     // // * Sign a JWT with the signer from above, and the ES256 header - ???????
     let time_options = TimeOptions::default();
 
-    let key = Es256k::new(key);
+    // let key = Es256k::new(key);
     // // * Return JWT
     Ok(String::from("???????"))
 }
