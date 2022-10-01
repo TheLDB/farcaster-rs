@@ -2,12 +2,32 @@ use std::collections::HashMap;
 
 use serde::{Deserialize, Serialize};
 
+/// # Notification Root Struct
+/// 
+/// When getting all of the Notifications, we need structs to Deserialize all of the JSON into
+/// 
+/// This holds two different values:
+/// 
+/// * `result`: NotifResult
+///     - NotifResult is also defined in this struct, feel free to explore it, there is no documentation for it
+/// 
+/// * `meta`: Meta
+///     - Meta holds a next value which is the link to the next page of notifications for Pagination reasons
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 pub struct NotifRoot {
     pub result: NotifResult,
     pub meta: Meta
 }
 
+/// # Notification Result Struct
+/// 
+/// This is an inner struct for the Notifications, and only getting documentation because the way it's parsed is special.
+/// 
+/// * When getting the results for the notifications, no object key is defined/set, its always a prefix, then a random address
+///     - Ex: ``cast-reaction-v2:0x00000....`` but with an actual address
+/// 
+/// * Because of the above, we parse the JSON into a ``HashMap<String, CastReaction``
+///     - The String will be the object name, and the CastReaction is the underlying value
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 pub struct NotifResult {
     pub notifications: HashMap<String, CastReaction>
