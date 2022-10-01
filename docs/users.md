@@ -8,6 +8,7 @@ Users harbors all the functions that are associated with user function, from get
 - [Get all casts of a user w/ Pagination](#get-all-casts-of-a-user)
 - [Get a users info](#get-a-users-info)
 - [Get the verified address of a user](#get-the-verified-address-of-a-user)
+- [Get the followers of a user](#get-the-followers-of-a-user)
 
 # Example Usage
 
@@ -189,4 +190,43 @@ Root {
 }
 ```
 
+## Get the followers of a user
 
+Code:
+```rust
+use farcaster_rs::Farcaster;
+
+#[tokio::main]
+async fn main() {
+    let farcaster = Farcaster::new("https://goerli.infura.io/v3/{key}".to_string());
+
+    // get_followers takes 2 Optional parameters, either a username (known as an fname on FC), or an Ethereum address
+    // In this example, we are fetching the followers of @dwr (https://danromero.org, https://farcaster.xyz)
+    let followers = farcaster.get_followers(Some("dwr".to_string()), None).await.unwrap();
+
+    for i in followers {
+        println!("{:#?}", i);
+    }
+}
+```
+
+Output:
+```rust
+Follower {
+    address: "0x6cd21149041F81d640C2A292402b2318Cbf5aD04",
+    username: "shilpa",
+    display_name: Some(
+        "shilpa",
+    ),
+    avatar: Avatar {
+        url: Some(
+            "https://lh3.googleusercontent.com/DEUlOy0Z3GKRWUoRSfAk2w9-nnysYmyZa6-7-m07r-O9LePeTh0SVwGM-uuPzHFh14vtsnxQ5iptbiPoyZmbpTFaBrWACyOAd26XWQ",
+        ),
+        is_verified: Some(
+            true,
+        ),
+    },
+    is_viewer_following: false,
+    verifications: [],
+}
+```
