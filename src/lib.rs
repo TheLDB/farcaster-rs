@@ -1,3 +1,15 @@
+//! # farcaster-rs
+//! By [Landon Boles](https://github.com/TheLDB)
+//! 
+//! farcaster-rs is a simple and easy way to interact with [Farcaster](https://farcaster.xyz) in Rust
+//! 
+//! # Example Usage
+//! 
+//! * To view Logs documentation, go:
+//!     - [here](https://github.com/TheLDB/farcaster-rs) for GitHub examples
+//!     - [or here](./abi/index.html) for docs.rs documentation
+
+
 use ethers::{core::{types::Address, abi::Abi}, providers::{Provider, Http}};
 pub mod logs;
 pub mod abi;

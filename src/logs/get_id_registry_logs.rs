@@ -13,7 +13,7 @@ impl Farcaster {
     /// * `&self`: &Farcaster
     ///     - Farcaster is the struct type created with ::new({client});
     /// 
-    /// Return Type
+    /// ## Return Type
     /// * ``-> Result<Vec<Log>, Box<dyn std::error::Error>>``
     ///     - Success: Vec<Log>
     ///         - A Log is a type defined in ethers::core::types::Log
@@ -25,7 +25,7 @@ impl Farcaster {
     /// ```
     /// let farcaster = Farcaster::new("client".to_string());
     /// 
-    /// let logs = farcaster.get_id_registry_logs().await.unwrap();
+    /// let logs = farcaster.get_name_registry_logs().await.unwrap();
     /// 
     /// for log in logs {
     ///     println!("{:#?}", log);
