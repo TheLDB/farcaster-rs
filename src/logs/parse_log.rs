@@ -14,7 +14,7 @@ impl Farcaster {
                     data: log.data.to_vec()
                 };
 
-                let log_desc = self.id_registry_abi.event(event.to_string().as_str()).unwrap().parse_log(raw_log).unwrap();
+                let log_desc = self.id_registry_abi.event(event.to_string().as_str())?.parse_log(raw_log)?;
                 Ok(log_desc)
             }
             Registry::NAME => {
@@ -23,7 +23,7 @@ impl Farcaster {
                     data: log.data.to_vec()
                 };
 
-                let log_desc = self.name_registry_abi.event(event.to_string().as_str()).unwrap().parse_log(raw_log).unwrap();
+                let log_desc = self.name_registry_abi.event(event.to_string().as_str())?.parse_log(raw_log)?;
                 Ok(log_desc)
             }
         }

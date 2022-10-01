@@ -3,11 +3,11 @@ use crate::{Farcaster, types::casts::casts::{Root}};
 #[allow(unreachable_code)]
 impl Farcaster {
     pub async fn get_casts(&self, username: String, casts_per_page: i64, page: i64) -> Result<Root, Box<dyn std::error::Error>> {
-        let user = Farcaster::get_user_by_username(self, username).await.unwrap();
+        let user = Farcaster::get_user_by_username(self, username).await?;
         let address = user.result.user.address;
 
         let user = reqwest::get(format!("https://api.farcaster.xyz/v1/profiles/{}/casts?per_page={}", address, casts_per_page)).await?.text().await?;
-        let casts: Root = serde_json::from_str(&user).unwrap();
+        let casts: Root = serde_json::from_str(&user)?;
         if page > 0 {
             let mut loopy = 0;
             let mut new_user: String = String::from("");
@@ -16,7 +16,7 @@ impl Farcaster {
                 loopy += 1;
             }
             
-            let casts: Root = serde_json::from_str(&new_user).unwrap();
+            let casts: Root = serde_json::from_str(&new_user)?;
             return Ok(casts)
         }
         else {

@@ -19,7 +19,7 @@ impl Farcaster {
             }
             KeyType::MnemonicPhrase => {
                 let word_count = mnemonic_word_count.unwrap_or(12);
-                let word_count: usize = word_count.try_into().unwrap();
+                let word_count: usize = word_count.try_into()?;
                 let wallet = MnemonicBuilder::<English>::default()
                     .word_count(word_count)
                     .phrase(key.as_str())
