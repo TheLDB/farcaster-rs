@@ -3,6 +3,29 @@ use crate::{Farcaster, types::user::notifications::NotifRoot};
 
 impl Farcaster {
     #[allow(unused_assignments)]
+    /// # Get all notifications of a user
+    /// 
+    /// ## Arguments
+    /// 
+    /// * `self: &Farcaster`
+    ///     - Takes in a type of Farcaster which is created at the start with ``Farcaster::new("client".to_string());``
+    /// 
+    /// * `username: Option<String>`
+    ///     - The username you want to fetch casts for
+    ///     - Optional
+    /// 
+    /// * `address: Option<String>`
+    ///     - The address for the user you want to get
+    ///     - Optional
+    /// 
+    /// ## Usage
+    /// ```
+    /// let farcaster = Farcaster::new("".to_string());
+    /// 
+    /// let notifications = farcaster.get_notifications(Some("jayme".to_string()), None).await.unwrap();
+    /// 
+    /// println!("{:#?}", notifications);
+    /// ```
     pub async fn get_notifications(&self, username: Option<String>, address: Option<String>, page: i64) -> Result<NotifRoot, Box<dyn std::error::Error>> {
         let mut res_address: String = "".to_string();
         if username.is_some() {

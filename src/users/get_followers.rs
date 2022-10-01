@@ -3,6 +3,31 @@ use std::result::Result;
 
 #[allow(unused_assignments)]
 impl Farcaster {
+    /// # Get all followers of a user
+    /// 
+    /// ## Arguments
+    /// 
+    /// * `self: &Farcaster`
+    ///     - Takes in a type of Farcaster which is created at the start with ``Farcaster::new("client".to_string());``
+    /// 
+    /// * `username: Option<String>`
+    ///     - The username you want to fetch casts for
+    ///     - Optional
+    /// 
+    /// * `address: Option<String>`
+    ///     - The address for the user you want to get
+    ///     - Optional
+    /// 
+    /// ## Usage
+    /// ```
+    /// let farcaster = Farcaster::new("".to_string());
+    /// 
+    /// let followers = farcaster.get_followers(Some("ace".to_string()), None).await.unwrap();
+    /// 
+    /// for follower in followers {
+    ///     println!("{:#?}", follower);
+    /// }
+    /// ```
     pub async fn get_followers(&self, username: Option<String>, address: Option<String>) -> Result<Vec<Follower>, Box<dyn std::error::Error>> {
         let mut res_address: String = "".to_string();
         if username.is_some() {

@@ -4,6 +4,25 @@ use crate::types::user::user::Root;
 use crate::types::{logs::events::Events};
 
 impl Farcaster {
+    /// # Get the details of a user
+    /// 
+    /// ## Arguments
+    /// 
+    /// * `self: &Farcaster`
+    ///     - Takes in a type of Farcaster which is created at the start with ``Farcaster::new("client".to_string());``
+    /// 
+    /// * `username: String`
+    ///     - The username you want to fetch casts for
+    ///     - Optional
+    /// 
+    /// ## Usage
+    /// ```
+    /// let farcaster = Farcaster::new("".to_string());
+    /// 
+    /// let user = farcaster.get_user_by_username("lndnnft".to_string()).await.unwrap();
+    /// 
+    /// println!("{:#?}", user);
+    /// ```
     pub async fn get_user_by_username(&self, username: String) -> Result<Root, Box<dyn std::error::Error>> {
         let name_registry_logs = self.get_name_registry_logs().await?;
 

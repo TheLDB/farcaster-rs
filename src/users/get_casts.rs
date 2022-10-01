@@ -2,6 +2,31 @@ use crate::{Farcaster, types::casts::casts::Root};
 
 #[allow(unreachable_code)]
 impl Farcaster {
+    /// # Get all Casts of a user
+    /// With pagination!
+    /// 
+    /// ## Arguments
+    /// 
+    /// * `self: &Farcaster`
+    ///     - Takes in a type of Farcaster which is created at the start with ``Farcaster::new("client".to_string());``
+    /// 
+    /// * `username: String`
+    ///     - The username you want to fetch casts for
+    /// 
+    /// * `casts_per_page: i64`
+    ///     - The amount of casts per page
+    /// 
+    /// * `page: i64`
+    ///     - What page number you get.
+    /// 
+    /// ## Usage
+    /// ```
+    /// let farcaster = Farcaster::new("".to_string());
+    /// 
+    /// let casts = farcaster.get_casts("dwr".to_string(), 30, 2).await.unwrap();
+    /// 
+    /// println!("{:#?}", casts);
+    /// ```
     pub async fn get_casts(&self, username: String, casts_per_page: i64, page: i64) -> Result<Root, Box<dyn std::error::Error>> {
         let user = Farcaster::get_user_by_username(self, username).await?;
         let address = user.result.user.address;
