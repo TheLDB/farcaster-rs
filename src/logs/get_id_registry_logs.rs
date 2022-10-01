@@ -6,6 +6,31 @@ use ethers::{
 use crate::Farcaster;
 
 impl Farcaster {
+    /// ## Get all of the ID Registry Logs from the FC V2 smart contracts on Goerli
+    /// 
+    /// ## Arguments
+    /// 
+    /// * `&self`: &Farcaster
+    ///     - Farcaster is the struct type created with ::new({client});
+    /// 
+    /// Return Type
+    /// * ``-> Result<Vec<Log>, Box<dyn std::error::Error>>``
+    ///     - Success: Vec<Log>
+    ///         - A Log is a type defined in ethers::core::types::Log
+    ///             - It holds all the info of that specific event, and can be parsed with the parse_log function for the inner args
+    ///     - Error: Box<dyn std::error::Error>
+    ///         - A Boxed error, most commonly a string slice throughout this crate
+    /// 
+    /// ## Usage
+    /// ```
+    /// let farcaster = Farcaster::new("client".to_string());
+    /// 
+    /// let logs = farcaster.get_id_registry_logs().await.unwrap();
+    /// 
+    /// for log in logs {
+    ///     println!("{:#?}", log);
+    /// }
+    /// ```
     pub async fn get_id_registry_logs(&self) -> Result<Vec<Log>, Box<dyn std::error::Error>> {
         let id_registry = "0xda107a1caf36d198b12c16c7b6a1d1c795978c42"
             .parse::<Address>()?;
