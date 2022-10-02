@@ -3,7 +3,7 @@
     <h1 align="center">farcaster-rs</h1>
      <h3 align="center">🚀 A simple & easy way to interface with <a href="https://farcaster.xyz">Farcaster</a> via <span style="color: #dea584;">Rust 🦀</span></h1>
      <p>Author: Landon Boles</p>
-     <div align="center" style="display: flex; flex-direction: row; justify-content: center;">
+     <div align="center" style="display: flex; justify-content: center;">
         <a href="https://github.com/TheLDB" style="padding-right: 5px;">GitHub</a>
         <p> | </p>
         <a href="/" style="padding-left: 5px; padding-right: 5px;">Farcaster: lndnNFT</a>
