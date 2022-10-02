@@ -1,34 +1,83 @@
-# farcaster-rs
-By Landon Boles [Github](https://github.com/TheLDB) | [Twitter](https://twitter.com/landon_xyz) | Farcaster: @lndnNFT
+<div align="center">
+    <img src="https://github.com/TheLDB/farcaster-rs/blob/main/docs/banner.png" >
+    <h1 align="center">farcaster-rs</h1>
+     <h3 align="center">🚀 A simple & easy way to interface with <a href="https://farcaster.xyz">Farcaster</a> via <span style="color: #dea584;">Rust 🦀</span></h1>
+     <p>Author: Landon Boles</p>
+     <div align="center" style="display: flex; flex-direction: row; justify-content: center;">
+        <a href="https://github.com/TheLDB" style="padding-right: 5px;">GitHub</a>
+        <p> | </p>
+        <a href="/" style="padding-left: 5px; padding-right: 5px;">Farcaster: lndnNFT</a>
+        <p> | </p>
+        <a href="https://landonboles.com" style="padding-left: 5px; padding-right: 5px;">Website</a>
+        <p> | </p>
+        <a href="mailto:ldb@erikboles.com" style="padding-left: 5px; padding-right: 5px;">Email Me</a>
+        <p> | </p>
+        <a href="https://twitter.com/lndnNFT" style="padding-left: 5px; padding-right: 5px;">Bird App</a>
+     </div>
+</div>
 
-[docs.rs](https://docs.rs/farcaster-rs/0.1.0-beta.2/farcaster_rs/)
+<br />
+<br />
+<br />
 
-## Description
-farcaster-rs is a rust crate built to interface & interact with the [Farcaster](https://farcaster.xyz) V2 Smart Contracts on Goerli, and their API
+# 📜 Documentation
 
-This project was built to:
-- Get more familiar w/ Rust
-- Build a fun project
-- Have a nice way to interact w/ Farcaster for future projects
+## For extensive documentation, visit our [docs.rs page](https://docs.rs/farcaster-rs/0.1.0-beta.3/farcaster_rs/)
 
-# Example Usage
+Otherwise, check out the [docs](https://github.com/TheLDB/farcaster-rs/tree/main/docs) folder for examples on how to use functions from each method.
 
-To view Logs documentation, go [here](./docs/logs.md)
-- Get ID Registry Logs/Events
-- Get Name Registry Logs/Events
-- Parse a Log to get the underlying arguments & info
+<br />
 
-To view Users documentation, go [here](./docs/users.md)
-- Get a specific users casts (pagination supported)
-- Get a users verified address
-- Get a users info
-- & More (eventually)
+# 🚀 Getting Started 
 
-To view ABI documentation, go [here](./docs/abi.md)
-- Get a registry ABI
-    - Either the Name registry, or ID registry
+## Installation
 
-To view Casts documentation, go [here](./docs/casts.md)
-- (WIP) Publish a cast
-- (Future) Send a direct cast
-- & more
+To get started, add the farcaster_rs crate to your ``Cargo.toml`` file
+```toml
+farcaster_rs = "0.1.0-beta.3"
+```
+
+Once you have the crate installed, you can start using the crate!
+
+## Usage
+
+In your ``main.rs`` file, set up a new Farcaster struct using the ``::new(client: String)`` method.
+
+```rust
+use farcaster_rs::Farcaster;
+
+#[tokio::main]
+async fn main() {
+    let farcaster = Farcaster::new("https://goerli.infura.io/v3/key");
+
+    let landon = farcaster.get_user_by_username("lndnnft".to_string()).await.unwrap();
+
+    println!("{:#?}", landon);
+}
+```
+
+<br />
+
+# 🙏 Contributing
+
+To start, I appreciate any and all contributions to the <span style="color: #dea584">farcaster-rs</span> repository!
+
+There are x prefered things I'd like if you decide to contribute, however.
+
+## 1. Ensure the issue/contribution is needed
+If you spend your time building something, please ensure it's actually wanted/needed, this is best done by using the [Issues](https://github.com/TheLDB/farcaster-rs/issues) tab, and either viewing other discussions, or opening a new issue/discussion
+
+## 2. Create a new branch for your contribution
+Once you have validated the contribution, and forked the repo to your own GitHub account, please create a new branch to commit your code onto.
+
+This can be done via the git CLI pretty easily:
+```sh
+$ git switch -c my_cool_feature
+```
+
+## 3. Create a detailed pull request, with documentation
+I'd like to keep everything documented to make it as easy as possible for people looking to use the crate.
+
+When opening a pull request, please ensure your function/contribution has been properly documented, and include good information about it in the PR. (use common sense)
+
+Thanks so much!
