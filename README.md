@@ -1,7 +1,7 @@
 # farcaster-rs
 By Landon Boles [Github](https://github.com/TheLDB) | [Twitter](https://twitter.com/landon_xyz) | Farcaster: @lndnNFT
 
-docs.rs link when finished
+[docs.rs](https://docs.rs/farcaster-rs/0.1.0-beta.1/farcaster_rs/)
 
 ## Description
 farcaster-rs is a rust crate built to interface & interact with the [Farcaster](https://farcaster.xyz) V2 Smart Contracts on Goerli, and their API
