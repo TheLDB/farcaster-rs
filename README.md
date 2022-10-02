@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/TheLDB/farcaster-rs/blob/main/docs/banner.png" >
+    <img src="https://raw.githubusercontent.com/TheLDB/farcaster-rs/main/docs/banner.png" >
     <h1 align="center">farcaster-rs</h1>
      <h3 align="center">🚀 A simple & easy way to interface with <a href="https://farcaster.xyz">Farcaster</a> via <span style="color: #dea584;">Rust 🦀</span></h1>
      <p>Author: Landon Boles</p>
