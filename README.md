@@ -62,7 +62,7 @@ async fn main() {
 
 To start, I appreciate any and all contributions to the <span style="color: #dea584">farcaster-rs</span> repository!
 
-There are x prefered things I'd like if you decide to contribute, however.
+There are 3 prefered things I'd like if you decide to contribute, however.
 
 ## 1. Ensure the issue/contribution is needed
 If you spend your time building something, please ensure it's actually wanted/needed, this is best done by using the [Issues](https://github.com/TheLDB/farcaster-rs/issues) tab, and either viewing other discussions, or opening a new issue/discussion
