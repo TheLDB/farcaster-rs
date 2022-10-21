@@ -10,8 +10,6 @@
         <p> | </p>
         <a href="https://landonboles.com" style="padding-left: 5px; padding-right: 5px;">Website</a>
         <p> | </p>
-        <a href="mailto:ldb@erikboles.com" style="padding-left: 5px; padding-right: 5px;">Email Me</a>
-        <p> | </p>
         <a href="https://twitter.com/lndnNFT" style="padding-left: 5px; padding-right: 5px;">Bird App</a>
      </div>
 </div>
