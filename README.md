@@ -46,7 +46,7 @@ use farcaster_rs::Farcaster;
 
 #[tokio::main]
 async fn main() {
-    let farcaster = Farcaster::new("https://goerli.infura.io/v3/key");
+    let farcaster = Farcaster::new("https://goerli.infura.io/v3/key".to_string());
 
     let landon = farcaster.get_user_by_username("lndnnft".to_string()).await.unwrap();
 
