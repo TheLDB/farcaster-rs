@@ -6,8 +6,6 @@
      <div align="center" style="display: flex; justify-content: center;">
         <a href="https://github.com/TheLDB" style="padding-right: 5px;">GitHub</a>
         <p> | </p>
-        <a href="/" style="padding-left: 5px; padding-right: 5px;">Farcaster: lndnNFT</a>
-        <p> | </p>
         <a href="https://landonboles.com" style="padding-left: 5px; padding-right: 5px;">Website</a>
         <p> | </p>
         <a href="https://twitter.com/lndnNFT" style="padding-left: 5px; padding-right: 5px;">Bird App</a>
