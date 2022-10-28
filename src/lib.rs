@@ -20,7 +20,7 @@
 //!
 //! # 📜 Documentation
 //!
-//! ## For extensive documentation, visit our [docs.rs page](https://docs.rs/farcaster-rs/0.1.0-pre.3/farcaster_rs/)
+//! ## For extensive documentation, visit our [docs.rs page](https://docs.rs/farcaster-rs/0.1.0-pre.5/farcaster_rs/)
 //!
 //! Otherwise, check out the [docs](https://github.com/TheLDB/farcaster-rs/tree/main/docs) folder for examples on how to use functions from each method.
 //!
@@ -32,7 +32,7 @@
 //!
 //! To get started, add the farcaster_rs crate to your ``Cargo.toml`` file
 //! ```toml
-//! farcaster_rs = "0.1.0-pre.4"
+//! farcaster_rs = "0.1.0-pre.5"
 //! ```
 //!
 //! Once you have the crate installed, you can start using the crate!
