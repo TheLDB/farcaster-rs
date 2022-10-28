@@ -45,12 +45,6 @@ impl Farcaster {
 
         let logs = self.provider.get_logs(&filter).await?;
 
-        let mut log_vec: Vec<Log> = vec![];
-
-        for event in logs {
-            log_vec.push(event);
-        }
-
-        Ok(log_vec)
+        Ok(logs)
     }
 }
