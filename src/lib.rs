@@ -32,7 +32,7 @@
 //!
 //! To get started, add the farcaster_rs crate to your ``Cargo.toml`` file
 //! ```toml
-//! farcaster_rs = "0.1.0-pre.3"
+//! farcaster_rs = "0.1.0-pre.4"
 //! ```
 //!
 //! Once you have the crate installed, you can start using the crate!
