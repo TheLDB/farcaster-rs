@@ -51,18 +51,10 @@ impl Farcaster {
             .address(id_registry)
             .topic0(transfer_topic);
 
-        let register_logs = self.provider.get_logs(&register_filter).await?;
-        let transfer_logs = self.provider.get_logs(&transfer_filter).await?;
+        let mut id_logs = vec![];
 
-        let mut id_logs: Vec<Log> = vec![];
-        
-        for log in register_logs {
-            id_logs.push(log);
-        }
-
-        for log in transfer_logs {
-            id_logs.push(log);
-        }
+        id_logs.extend(self.provider.get_logs(&register_filter).await?);
+        id_logs.extend(self.provider.get_logs(&transfer_filter).await?);
 
         Ok(id_logs)
     }
