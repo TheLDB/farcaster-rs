@@ -6,7 +6,7 @@
      <div align="center" style="display: flex; justify-content: center;">
         <a href="https://github.com/TheLDB" style="padding-right: 5px;">GitHub</a>
         <p> | </p>
-        <a href="farcaster://profiles/0x23D994eb22A23F57088D72a421B46Fb5Fe5Ae1fa/posts" style="padding-left: 5px; padding-right: 5px;">Farcaster</a>
+        <a href="https://perl.xyz/profile/lndnnft" style="padding-right: 5px; padding-left: 5px;">Farcaster</a>
         <p> | </p>
         <a href="https://twitter.com/landon_xyz" style="padding-left: 5px; padding-right: 5px;">Bird App</a>
      </div>
