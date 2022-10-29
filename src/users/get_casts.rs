@@ -1,53 +1,56 @@
-use crate::{Farcaster, types::casts::casts::CastRoot};
+use crate::types::casts::casts::{Cast, CastRoot};
+use crate::Farcaster;
 
-#[allow(unreachable_code)]
 impl Farcaster {
-    /// # Get all Casts of a user
-    /// With pagination!
-    /// 
-    /// ## Arguments
-    /// 
-    /// * `self: &Farcaster`
-    ///     - Takes in a type of Farcaster which is created at the start with ``Farcaster::new("client".to_string());``
-    /// 
-    /// * `username: String`
-    ///     - The username you want to fetch casts for
-    /// 
-    /// * `casts_per_page: i64`
-    ///     - The amount of casts per page
-    /// 
-    /// * `page: i64`
-    ///     - What page number you get.
-    /// 
-    /// ## Usage
-    /// ```no_run
-    /// let farcaster = Farcaster::new("".to_string());
-    /// 
-    /// let casts = farcaster.get_casts("dwr".to_string(), 30, 2).await.unwrap();
-    /// 
-    /// println!("{:#?}", casts);
-    /// ```
-    pub async fn get_casts(&self, username: String, casts_per_page: i64, page: i64) -> Result<CastRoot, Box<dyn std::error::Error>> {
-        let user = Farcaster::get_user_by_username(self, username).await?;
+    /// fetches all Casts for a given `username` from newest to oldest
+    pub async fn get_casts_by_username(
+        &self,
+        username: &str,
+    ) -> Result<Vec<Cast>, Box<dyn std::error::Error>> {
+        self.get_casts_by_username_with_limit(username, 0).await
+    }
+
+    /// fetches latest Casts for a given `username` up to `max_casts`
+    /// if `max_casts` is zero fetches all available casts
+    pub async fn get_casts_by_username_with_limit(
+        &self,
+        username: &str,
+        max_casts: usize,
+    ) -> Result<Vec<Cast>, Box<dyn std::error::Error>> {
+        let user = Farcaster::get_user_by_username(self, String::from(username)).await?;
         let address = user.result.user.address;
 
-        let user = reqwest::get(format!("https://api.farcaster.xyz/v1/profiles/{}/casts?per_page={}", address, casts_per_page)).await?.text().await?;
-        let casts: CastRoot = serde_json::from_str(&user)?;
-        if page > 0 {
-            let mut loopy = 0;
-            let mut new_user: String = String::from("");
-            while loopy != page {
-                new_user = reqwest::get(casts.meta.next.clone()).await?.text().await?;
-                loopy += 1;
+        let mut casts = Vec::new();
+        let mut fetch_url = format!("https://api.farcaster.xyz/v1/profiles/{}/casts", address);
+
+        // when max_casts is zero, sky is the limit!
+        let read_limit = match max_casts {
+            0 => usize::MAX,
+            _ => max_casts,
+        };
+
+        while casts.len() < read_limit {
+            // fetch CastRoot
+            let response = reqwest::get(&fetch_url).await?.text().await?;
+            let cast_root: CastRoot = serde_json::from_str(&response)?;
+
+            // store received casts
+            casts.extend(cast_root.result.casts);
+
+            if let Some(next_url) = cast_root.meta.next {
+                // update fetch_url
+                fetch_url = next_url;
+            } else {
+                // no more casts available
+                break;
             }
-            
-            let casts: CastRoot = serde_json::from_str(&new_user)?;
-            return Ok(casts)
-        }
-        else {
-            return Ok(casts)
         }
 
-        Err(Box::from("This error should be unreachable - if you got here either I fucked up or you fucked up"))
+        // trim casts to max_casts
+        if max_casts > 0 {
+            casts.truncate(max_casts);
+        }
+
+        Ok(casts)
     }
 }
