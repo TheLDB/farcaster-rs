@@ -16,6 +16,11 @@
 <br />
 <br />
 
+# Credits/Thank you
+
+- [MistApproach](https://github.com/MistApproach)
+  - Updated deps & optimized some registry functions :D
+
 # 📜 Documentation
 
 ## For extensive documentation, visit our [docs.rs page](https://docs.rs/farcaster-rs/0.1.0-pre.6/farcaster_rs/)
