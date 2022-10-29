@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 /// Casts - Root struct
-/// 
+///
 /// * ## !IMPORTANT
 ///     - There are 21 different structs in this file, and only this root one has documentation.
 ///     - Please explore the file on your own to see the different data types that the JSON gets Deserialized into
@@ -9,7 +9,7 @@ use serde::{Deserialize, Serialize};
 ///  - - -
 /// * `result`
 ///     - Is a type of Result, which is a struct in this same file that holds 99% of the stuff
-/// 
+///
 /// * `meta`
 ///     - Holds the Next struct, which provides a link for the next page, to allow for pagination.
 ///     - To use pagination on your own, I just looped through it x times until I reached the correct number.
@@ -199,5 +199,5 @@ pub struct ReplyParentUsername {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Meta2 {
-    pub next: String,
+    pub next: Option<String>,
 }
