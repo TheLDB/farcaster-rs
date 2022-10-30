@@ -2,11 +2,11 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 /// # User Root Struct
-/// 
+///
 /// When getting a user, we need structs to Deserialize the JSON into
-/// 
+///
 /// This struct holds one value
-/// 
+///
 /// * `result: Result`
 ///     - Result holds a User type, which itself holds a lot of the user data
 ///     - To view more about the data types, explore the many structs in this file.

@@ -1,11 +1,11 @@
 use serde::{Deserialize, Serialize};
 
 /// # Verified Address Root Struct
-/// 
+///
 /// When getting a verified address, we need structs to Deserialize the JSON into
-/// 
+///
 /// This struct holds on type
-/// 
+///
 /// * `result: Result`
 ///     - Result is a struct that holds a vector of VerifiedAddress'
 ///     - To view the other structs that VerifiedAddress' gets Deserialized into, explore this file
