@@ -17,7 +17,7 @@ impl Farcaster {
         username: &str,
         max_casts: usize,
     ) -> Result<Vec<Cast>, Box<dyn std::error::Error>> {
-        let user = Farcaster::get_user_by_username(self, String::from(username)).await?;
+        let user = Farcaster::get_user_by_username(self, username).await?;
         let address = user.result.user.address;
 
         let mut casts = Vec::new();

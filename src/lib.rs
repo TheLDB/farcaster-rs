@@ -48,7 +48,7 @@
 //! async fn main() {
 //!     let farcaster = Farcaster::new("https://goerli.infura.io/v3/key");
 //!
-//!     let landon = farcaster.get_user_by_username("lndnnft".to_string()).await.unwrap();
+//!     let landon = farcaster.get_user_by_username("lndnnft").await.unwrap();
 //!
 //!     println!("{:#?}", landon);
 //! }
@@ -101,7 +101,7 @@ pub struct Farcaster {
 }
 
 impl Farcaster {
-    pub fn new(client: String) -> Self {
+    pub fn new(client: &str) -> Self {
         let address = "0xe3be01d99baa8db9905b33a3ca391238234b79d1"
             .parse::<Address>()
             .unwrap();
