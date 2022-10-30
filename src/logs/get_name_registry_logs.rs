@@ -39,7 +39,7 @@ impl Farcaster {
             .parse::<H256>()?;
 
         let filter = Filter::new()
-            .select(1337u64..)
+            .select(7_648_795..)
             .address(name_registry)
             .topic0(transfer_topic);
 

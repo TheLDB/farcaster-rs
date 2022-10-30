@@ -42,12 +42,12 @@ impl Farcaster {
             .parse::<H256>()?;
 
         let register_filter = Filter::new()
-            .select(1337u64..)
+            .select(7_648_795..)
             .address(id_registry)
             .topic0(register_topic);
 
         let transfer_filter = Filter::new()
-            .select(1337u64..)
+            .select(7_648_795..)
             .address(id_registry)
             .topic0(transfer_topic);
 
