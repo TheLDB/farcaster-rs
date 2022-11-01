@@ -1,72 +1,76 @@
-use crate::{types::user::notifications::NotifRoot, Farcaster};
+use crate::types::user::notifications::{CastReaction, NotifRoot};
+use crate::Farcaster;
+use std::collections::HashMap;
+use std::error::Error;
 
 impl Farcaster {
-    #[allow(unused_assignments)]
-    /// # Get all notifications of a user
-    ///
-    /// ## Arguments
-    ///
-    /// * `self: &Farcaster`
-    ///     - Takes in a type of Farcaster which is created at the start with ``Farcaster::new("client");``
-    ///
-    /// * `username: Option<String>`
-    ///     - The username you want to fetch casts for
-    ///     - Optional
-    ///
-    /// * `address: Option<String>`
-    ///     - The address for the user you want to get
-    ///     - Optional
-    ///
-    /// ## Usage
-    /// ```
-    /// let farcaster = Farcaster::new("");
-    ///
-    /// let notifications = farcaster.get_notifications(Some("jayme".to_string()), None).await.unwrap();
-    ///
-    /// println!("{:#?}", notifications);
-    /// ```
-    pub async fn get_notifications(
+    /// fetches notifications for a given `address` up to `max_notifications`
+    /// if `max_notifications` is zero fetches all available notifications
+    /// TODO: implement trimming returned HashMap to `max_notifications` (without breaking ordering/timeline)
+    pub async fn get_notifications_by_address_with_limit(
         &self,
-        username: Option<String>,
-        address: Option<String>,
-        page: i64,
-    ) -> Result<NotifRoot, Box<dyn std::error::Error>> {
-        let mut res_address: String = "".to_string();
-        if username.is_some() {
-            let profile = self.get_user_by_username(&username.unwrap()).await?;
-            res_address = profile.result.user.address;
-        } else if address.is_some() {
-            res_address = address.unwrap();
-        } else {
-            return Err(Box::from(
-                "Please provide a username or address".to_string(),
-            ));
-        }
-
-        let request_address = format!(
+        address: &str,
+        max_notifications: usize,
+    ) -> Result<HashMap<String, CastReaction>, Box<dyn Error>> {
+        let mut notifications = HashMap::new();
+        let mut fetch_url = format!(
             "https://api.farcaster.xyz/v1/notifications?address={}",
-            res_address
+            address
         );
 
-        let req = reqwest::get(request_address).await?.text().await?;
-        let notifications: NotifRoot = serde_json::from_str(&req)?;
+        // dirty hack for unlimited fetch
+        let read_limit = match max_notifications {
+            0 => usize::MAX,
+            _ => max_notifications,
+        };
 
-        if page > 0 {
-            let mut loopy = 0;
-            let mut new_notifications: String = "".to_string();
-            while loopy != page {
-                new_notifications = reqwest::get(notifications.meta.next.clone())
-                    .await?
-                    .text()
-                    .await?;
-                loopy += 1;
+        while notifications.len() < read_limit {
+            // fetch notifications
+            let response = reqwest::get(&fetch_url).await?.text().await?;
+            let notif_root: NotifRoot = serde_json::from_str(&response)?;
+
+            // store received notifications
+            notifications.extend(notif_root.result.notifications);
+
+            if let Some(next_url) = notif_root.meta.next {
+                // update fetch_url
+                fetch_url = next_url;
+            } else {
+                // no more notifications available
+                break;
             }
-
-            let notifications: NotifRoot = serde_json::from_str(&new_notifications)?;
-
-            return Ok(notifications);
-        } else {
-            return Ok(notifications);
         }
+
+        Ok(notifications)
+    }
+
+    /// fetches notifications for a given `address`
+    pub async fn get_notifications_by_address(
+        &self,
+        address: &str,
+    ) -> Result<HashMap<String, CastReaction>, Box<dyn Error>> {
+        self.get_notifications_by_address_with_limit(address, 0)
+            .await
+    }
+
+    /// fetches notifications for a given `username` up to `max_notifications`
+    /// if `max_notifications` is zero fetches all available notifications
+    pub async fn get_notifications_by_username_with_limit(
+        &self,
+        username: &str,
+        max_notifications: usize,
+    ) -> Result<HashMap<String, CastReaction>, Box<dyn Error>> {
+        let user = self.get_user_by_username(username).await?;
+        self.get_notifications_by_address_with_limit(&user.result.user.address, max_notifications)
+            .await
+    }
+
+    /// fetches notifications for a given `username`
+    pub async fn get_notifications_by_username(
+        &self,
+        username: &str,
+    ) -> Result<HashMap<String, CastReaction>, Box<dyn Error>> {
+        self.get_notifications_by_username_with_limit(username, 0)
+            .await
     }
 }
