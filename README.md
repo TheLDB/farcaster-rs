@@ -50,9 +50,9 @@ use farcaster_rs::Farcaster;
 
 #[tokio::main]
 async fn main() {
-    let farcaster = Farcaster::new("https://goerli.infura.io/v3/key".to_string());
+    let farcaster = Farcaster::new("https://goerli.infura.io/v3/key");
 
-    let landon = farcaster.get_user_by_username("lndnnft".to_string()).await.unwrap();
+    let landon = farcaster.get_user_by_username("lndnnft").await.unwrap();
 
     println!("{:#?}", landon);
 }

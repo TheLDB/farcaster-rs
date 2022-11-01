@@ -1,6 +1,9 @@
-use ethers::{signers::{Wallet, Signer}, prelude::k256::ecdsa::SigningKey};
-use chrono::offset::Utc;
 use crate::Farcaster;
+use chrono::offset::Utc;
+use ethers::{
+    prelude::k256::ecdsa::SigningKey,
+    signers::{Signer, Wallet},
+};
 
 // #[derive(Debug, PartialEq, Serialize, Deserialize)]
 // pub struct CustomClaims {
@@ -26,7 +29,10 @@ async fn auth_header(wallet: Wallet<SigningKey>) -> Result<String, Box<dyn std::
 }
 
 impl Farcaster {
-    pub async fn publish_cast(wallet: Wallet<SigningKey>, _content: String) -> Result<(), Box<dyn std::error::Error>> {
+    pub async fn publish_cast(
+        wallet: Wallet<SigningKey>,
+        _content: String,
+    ) -> Result<(), Box<dyn std::error::Error>> {
         let _auth = auth_header(wallet).await;
         Ok(())
     }
