@@ -95,5 +95,5 @@ pub struct Cast {
 
 #[derive(Debug, PartialEq, Deserialize, Serialize)]
 pub struct Meta {
-    pub next: String,
+    pub next: Option<String>,
 }
