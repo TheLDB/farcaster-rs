@@ -15,9 +15,9 @@ pub mod users;
 /// The Farcaster type that holds the keys to the castle - so to speak :)
 #[derive(Debug)]
 pub struct Farcaster {
-    pub name_registry_abi: Abi,
-    pub id_registry_abi: Abi,
-    pub provider: Provider<Http>,
+    pub(crate) name_registry_abi: Abi,
+    pub(crate) id_registry_abi: Abi,
+    pub(crate) provider: Provider<Http>,
 }
 
 impl Farcaster {
