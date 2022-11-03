@@ -41,14 +41,16 @@ Once you have the crate installed, you can start using the crate!
 
 ## Usage
 
-In your `main.rs` file, set up a new Farcaster struct using the `::new(client: String)` method.
+To connect to and use Farcaster API you need Ethereum provider HTTP endpoint along with mnemonic phrase
+or private key of an existing Farcaster account.
 
 ```rust
-use farcaster_rs::Farcaster;
+use farcaster_rs::{Farcaster, FarcasterAccount};
 
 #[tokio::main]
 async fn main() {
-    let farcaster = Farcaster::new("https://goerli.infura.io/v3/key");
+    let account = FarcasterAccount::from_mnemonic("top secret mnemonic phrase");
+    let farcaster = Farcaster::new("https://ethereum.provider/api", account);
 
     let landon = farcaster.get_user_by_username("lndnnft").await.unwrap();
 

@@ -5,6 +5,7 @@ use ethers::{
 
 use types::abi::registry::Registry;
 pub mod abi;
+pub mod account;
 pub mod auth;
 pub mod casts;
 pub mod constants;
@@ -12,16 +13,20 @@ pub mod logs;
 pub mod types;
 pub mod users;
 
+pub use types::account::FarcasterAccount;
+
 /// The Farcaster type that holds the keys to the castle - so to speak :)
 #[derive(Debug)]
 pub struct Farcaster {
+    #[allow(dead_code)]
+    pub(crate) account: FarcasterAccount,
     pub(crate) name_registry_abi: Abi,
     pub(crate) id_registry_abi: Abi,
     pub(crate) provider: Provider<Http>,
 }
 
 impl Farcaster {
-    pub fn new(client: &str) -> Self {
+    pub fn new(client: &str, account: FarcasterAccount) -> Self {
         let name_abi_str = Farcaster::get_registry_abi(Registry::NAME).unwrap();
         let name_abi: Abi = serde_json::from_str(name_abi_str).unwrap();
         let id_abi_str = Farcaster::get_registry_abi(Registry::ID).unwrap();
@@ -29,6 +34,7 @@ impl Farcaster {
         let client = Provider::<Http>::try_from(client).unwrap();
 
         Farcaster {
+            account,
             name_registry_abi: name_abi,
             id_registry_abi: id_abi,
             provider: client,
