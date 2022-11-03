@@ -3,7 +3,7 @@ use ethers::{
     types::{Address, Filter, Log, H256},
 };
 
-use crate::constants::registry::FNR_CONTRACT_ADDRESS;
+use crate::constants::registry::{FNR_CONTRACT_ADDRESS, FNR_DEPLOYMENT_BLOCK};
 use crate::Farcaster;
 
 impl Farcaster {
@@ -39,7 +39,7 @@ impl Farcaster {
             "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef".parse::<H256>()?;
 
         let filter = Filter::new()
-            .select(7_648_795..)
+            .select(FNR_DEPLOYMENT_BLOCK..)
             .address(name_registry)
             .topic0(transfer_topic);
 
