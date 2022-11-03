@@ -24,7 +24,7 @@ impl Farcaster {
 
         // fill in bearer token parameters
         let params = Params {
-            timestamp: timestamp,
+            timestamp,
             expires_at: match duration_secs {
                 // with expiration time
                 Some(secs) => Some(timestamp + (secs * 1000)),
