@@ -7,7 +7,7 @@ use crate::{
 };
 
 impl Farcaster {
-    pub async fn get_session_token(bearer: Bearer) -> Result<Secret, Box<dyn std::error::Error>> {
+    pub async fn get_session_token(bearer: &Bearer) -> Result<Secret, Box<dyn std::error::Error>> {
         let payload: Value = json!({
             "method": "generateToken",
             "params": {
@@ -19,7 +19,7 @@ impl Farcaster {
         let session_reqwest: String = reqwest::Client::new()
             .put(format!("{}/v2/auth", API_ROOT))
             .header("Content-Type", "application/json")
-            .header("Authorization", bearer.bearer)
+            .header("Authorization", &bearer.bearer)
             .json(&payload)
             .send()
             .await?
