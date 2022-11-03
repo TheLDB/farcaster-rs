@@ -2,8 +2,10 @@ use ethers::{
     core::{abi::Abi, types::Address},
     providers::{Http, Provider},
 };
+
 use types::abi::registry::Registry;
 pub mod abi;
+pub mod auth;
 pub mod casts;
 pub mod logs;
 pub mod types;

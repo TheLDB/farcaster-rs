@@ -15,3 +15,7 @@ pub mod user;
 /// ## Wallet
 /// Holds structs for wallets
 pub mod wallet;
+
+/// ## Auth
+/// Holds authentication structs
+pub mod auth;
