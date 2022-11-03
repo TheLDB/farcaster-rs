@@ -1,6 +1,7 @@
 use serde_json::{json, Value};
 
 use crate::{
+    constants::api_root::API_ROOT,
     types::auth::{bearer::Bearer, secret::Secret},
     Farcaster,
 };
@@ -16,7 +17,7 @@ impl Farcaster {
         });
 
         let session_reqwest: String = reqwest::Client::new()
-            .put("https://api.farcaster.xyz/v2/auth")
+            .put(format!("{}/v2/auth", API_ROOT))
             .header("Content-Type", "application/json")
             .header("Authorization", bearer.bearer)
             .json(&payload)

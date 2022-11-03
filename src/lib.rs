@@ -7,6 +7,7 @@ use types::abi::registry::Registry;
 pub mod abi;
 pub mod auth;
 pub mod casts;
+pub mod constants;
 pub mod logs;
 pub mod types;
 pub mod users;
