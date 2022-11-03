@@ -16,5 +16,6 @@ pub struct Payload {
 pub struct Params {
     pub timestamp: i64,
     #[serde(rename = "expiresAt")]
-    pub expires_at: i64,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub expires_at: Option<i64>,
 }
