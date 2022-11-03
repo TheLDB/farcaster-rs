@@ -14,7 +14,7 @@ use serde_json::{json, Value};
 
 impl Farcaster {
     pub async fn generate_bearer(
-        wallet: Wallet<SigningKey>,
+        wallet: &Wallet<SigningKey>,
     ) -> Result<Bearer, Box<dyn std::error::Error>> {
         // Get the current unix timestamp (non-leap seconds since January 1, 1970 00:00:00 UTC)
         let dt: DateTime<Utc> = Utc::now();
