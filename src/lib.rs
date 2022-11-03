@@ -3,6 +3,7 @@ use ethers::{
     providers::{Http, Provider},
 };
 
+use constants::registry::FNR_CONTRACT_ADDRESS;
 use types::abi::registry::Registry;
 pub mod abi;
 pub mod auth;
@@ -23,9 +24,7 @@ pub struct Farcaster {
 
 impl Farcaster {
     pub fn new(client: &str) -> Self {
-        let address = "0xe3be01d99baa8db9905b33a3ca391238234b79d1"
-            .parse::<Address>()
-            .unwrap();
+        let address = FNR_CONTRACT_ADDRESS.parse::<Address>().unwrap();
         let name_abi_str = Farcaster::get_registry_abi(Registry::NAME).unwrap();
         let name_abi: Abi = serde_json::from_str(name_abi_str).unwrap();
         let id_abi_str = Farcaster::get_registry_abi(Registry::ID).unwrap();

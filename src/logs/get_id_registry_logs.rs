@@ -3,6 +3,7 @@ use ethers::{
     types::{Address, Filter, Log, H256},
 };
 
+use crate::constants::registry::FIR_CONTRACT_ADDRESS;
 use crate::Farcaster;
 
 impl Farcaster {
@@ -32,7 +33,7 @@ impl Farcaster {
     /// }
     /// ```
     pub async fn get_id_registry_logs(&self) -> Result<Vec<Log>, Box<dyn std::error::Error>> {
-        let id_registry = "0xda107a1caf36d198b12c16c7b6a1d1c795978c42".parse::<Address>()?;
+        let id_registry = FIR_CONTRACT_ADDRESS.parse::<Address>()?;
 
         let register_topic =
             "0x3cd6a0ffcc37406d9958e09bba79ff19d8237819eb2e1911f9edbce656499c87".parse::<H256>()?;

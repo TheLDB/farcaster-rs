@@ -3,6 +3,7 @@ use ethers::{
     types::{Address, Filter, Log, H256},
 };
 
+use crate::constants::registry::FNR_CONTRACT_ADDRESS;
 use crate::Farcaster;
 
 impl Farcaster {
@@ -32,7 +33,7 @@ impl Farcaster {
     /// }
     /// ```
     pub async fn get_name_registry_logs(&self) -> Result<Vec<Log>, Box<dyn std::error::Error>> {
-        let name_registry = "0xe3be01d99baa8db9905b33a3ca391238234b79d1".parse::<Address>()?;
+        let name_registry = FNR_CONTRACT_ADDRESS.parse::<Address>()?;
 
         let transfer_topic =
             "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef".parse::<H256>()?;
