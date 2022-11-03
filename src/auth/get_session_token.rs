@@ -1,7 +1,7 @@
 use serde_json::{json, Value};
 
 use crate::{
-    constants::api_root::API_ROOT,
+    constants::merkle::API_ROOT,
     types::auth::bearer::Bearer,
     types::auth::secret::{Secret, SecretToken},
     Farcaster,
