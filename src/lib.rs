@@ -1,9 +1,8 @@
 use ethers::{
-    core::{abi::Abi, types::Address},
+    core::abi::Abi,
     providers::{Http, Provider},
 };
 
-use constants::registry::FNR_CONTRACT_ADDRESS;
 use types::abi::registry::Registry;
 pub mod abi;
 pub mod auth;
@@ -16,7 +15,6 @@ pub mod users;
 /// The Farcaster type that holds the keys to the castle - so to speak :)
 #[derive(Debug)]
 pub struct Farcaster {
-    pub address: Address,
     pub name_registry_abi: Abi,
     pub id_registry_abi: Abi,
     pub provider: Provider<Http>,
@@ -24,7 +22,6 @@ pub struct Farcaster {
 
 impl Farcaster {
     pub fn new(client: &str) -> Self {
-        let address = FNR_CONTRACT_ADDRESS.parse::<Address>().unwrap();
         let name_abi_str = Farcaster::get_registry_abi(Registry::NAME).unwrap();
         let name_abi: Abi = serde_json::from_str(name_abi_str).unwrap();
         let id_abi_str = Farcaster::get_registry_abi(Registry::ID).unwrap();
@@ -32,7 +29,6 @@ impl Farcaster {
         let client = Provider::<Http>::try_from(client).unwrap();
 
         Farcaster {
-            address,
             name_registry_abi: name_abi,
             id_registry_abi: id_abi,
             provider: client,
