@@ -19,3 +19,5 @@ pub mod wallet;
 /// ## Auth
 /// Holds authentication structs
 pub mod auth;
+
+pub mod v2;
