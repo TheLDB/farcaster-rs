@@ -18,8 +18,8 @@ impl Farcaster {
     ) -> Result<Bearer, Box<dyn std::error::Error>> {
         // Get the current unix timestamp (non-leap seconds since January 1, 1970 00:00:00 UTC)
         let dt: DateTime<Utc> = Utc::now();
-        let timestamp: i64 = dt.timestamp();
-        let expires_at: i64 = timestamp + 300; // Create an expiration timestamp 5 minutes in the future
+        let timestamp: i64 = dt.timestamp_millis();
+        let expires_at: i64 = timestamp + 300000; // Create an expiration timestamp 5 minutes in the future
 
         // Initialize a bearer payload using serde_json
         let payload: Value = json!({
