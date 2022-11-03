@@ -13,21 +13,30 @@ use crate::{
 use serde_json::{json, Value};
 
 impl Farcaster {
+    /// generates bearer token with optional duration
     pub async fn generate_bearer(
         wallet: &Wallet<SigningKey>,
+        duration_secs: Option<i64>,
     ) -> Result<Bearer, Box<dyn std::error::Error>> {
         // Get the current unix timestamp (non-leap seconds since January 1, 1970 00:00:00 UTC)
         let dt: DateTime<Utc> = Utc::now();
-        let timestamp: i64 = dt.timestamp_millis();
-        let expires_at: i64 = timestamp + 300000; // Create an expiration timestamp 5 minutes in the future
+        let timestamp = dt.timestamp_millis();
+
+        // fill in bearer token parameters
+        let params = Params {
+            timestamp: timestamp,
+            expires_at: match duration_secs {
+                // with expiration time
+                Some(secs) => Some(timestamp + (secs * 1000)),
+                // without expiration time
+                None => None,
+            },
+        };
 
         // Initialize a bearer payload using serde_json
         let payload: Value = json!({
-            "method": "generateToken",
-            "params": {
-                "timestamp": timestamp,
-                "expiresAt": expires_at
-            }
+                "method": "generateToken",
+                "params": params,
         });
 
         // Sign the payload using our ethers wallet
@@ -41,11 +50,6 @@ impl Farcaster {
 
         // Format our signature
         let bearer = format!("Bearer eip191:{}", base64_signature);
-
-        let params = Params {
-            timestamp,
-            expires_at,
-        };
 
         let payload = Payload {
             method: "generateToken".to_string(),
