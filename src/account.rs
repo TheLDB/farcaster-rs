@@ -75,4 +75,18 @@ impl FarcasterAccount {
 
         Ok(())
     }
+
+    /// Revokes a specific session token
+    pub async fn revoke_session_token(&mut self) -> Result<(), Box<dyn Error>> {
+        // Return error if no session token is present
+        if self.session_token.is_none() {
+            return Err(Box::from("No session token present"));
+        }
+
+        let _revoke =
+            crate::Farcaster::revoke_session_token(&self.session_token.as_ref().unwrap()).await?;
+
+        // Structure not build yet, therefore function not built yet.
+        Ok(())
+    }
 }
