@@ -1,43 +1,30 @@
-use ethers::{
-    core::abi::Abi,
-    providers::{Http, Provider},
-};
-
-use types::abi::registry::Registry;
-pub mod abi;
 pub mod account;
 pub mod auth;
 pub mod casts;
 pub mod constants;
-pub mod logs;
+pub mod registry;
 pub mod types;
 pub mod users;
-
 pub use types::account::FarcasterAccount;
+pub use types::registry::Registry;
+
+use std::error::Error;
 
 /// The Farcaster type that holds the keys to the castle - so to speak :)
 #[derive(Debug)]
 pub struct Farcaster {
     #[allow(dead_code)]
     pub(crate) account: FarcasterAccount,
-    pub(crate) name_registry_abi: Abi,
-    pub(crate) id_registry_abi: Abi,
-    pub(crate) provider: Provider<Http>,
+    pub registry: Registry,
 }
 
 impl Farcaster {
-    pub fn new(client: &str, account: FarcasterAccount) -> Self {
-        let name_abi_str = Farcaster::get_registry_abi(Registry::NAME).unwrap();
-        let name_abi: Abi = serde_json::from_str(name_abi_str).unwrap();
-        let id_abi_str = Farcaster::get_registry_abi(Registry::ID).unwrap();
-        let id_abi: Abi = serde_json::from_str(id_abi_str).unwrap();
-        let client = Provider::<Http>::try_from(client).unwrap();
+    pub async fn new(
+        ethereum_provider: &str,
+        account: FarcasterAccount,
+    ) -> Result<Self, Box<dyn Error>> {
+        let registry = Registry::new(ethereum_provider).await?;
 
-        Farcaster {
-            account,
-            name_registry_abi: name_abi,
-            id_registry_abi: id_abi,
-            provider: client,
-        }
+        Ok(Farcaster { account, registry })
     }
 }
