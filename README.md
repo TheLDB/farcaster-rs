@@ -47,15 +47,12 @@ or private key of an existing Farcaster account.
 ```rust
 use farcaster_rs::{Farcaster, FarcasterAccount};
 
-#[tokio::main]
-async fn main() {
-    let account = FarcasterAccount::from_mnemonic("top secret mnemonic phrase");
-    let farcaster = Farcaster::new("https://ethereum.provider/api", account);
+let account = FarcasterAccount::from_mnemonic("top secret mnemonic phrase");
+let farcaster = Farcaster::new("https://ethereum.provider/api", account).await?;
 
-    let landon = farcaster.get_user_by_username("lndnnft").await.unwrap();
+let landon = farcaster.get_user_by_username("lndnnft").await.unwrap();
 
-    println!("{:#?}", landon);
-}
+println!("{:#?}", landon);
 ```
 
 <br />
