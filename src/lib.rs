@@ -1,5 +1,4 @@
 pub mod account;
-pub mod auth;
 pub mod casts;
 pub mod constants;
 pub mod registry;

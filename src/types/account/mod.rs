@@ -1,5 +1,9 @@
-use crate::types::auth::bearer::Bearer;
-use crate::types::auth::secret::SecretToken;
+/// ## Auth
+/// Holds authentication structs
+pub mod auth;
+
+use auth::bearer::Bearer;
+use auth::secret::SecretToken;
 use ethers::prelude::k256::ecdsa::SigningKey;
 use ethers::signers::Wallet;
 

@@ -1,6 +1,6 @@
 use serde_json::{json, Value};
 
-use crate::{constants::merkle::API_ROOT, types::auth::secret::SecretToken, Farcaster};
+use crate::{constants::merkle::API_ROOT, types::account::auth::secret::SecretToken, Farcaster};
 use chrono::Utc;
 use std::error::Error;
 

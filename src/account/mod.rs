@@ -1,3 +1,5 @@
+pub mod auth;
+
 use crate::constants::merkle::AUTH_TOKEN_DEFAULT_DURATION_SECS;
 use crate::types::account::FarcasterAccount;
 use chrono::Utc;

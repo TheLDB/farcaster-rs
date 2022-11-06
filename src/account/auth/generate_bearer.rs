@@ -6,7 +6,7 @@ use ethers::{
 };
 
 use crate::{
-    types::auth::bearer::{Bearer, Params, Payload},
+    types::account::auth::bearer::{Bearer, Params, Payload},
     Farcaster,
 };
 

@@ -13,9 +13,6 @@ pub mod wallet;
 /// ## Account
 /// Holds Farcaster Account
 pub mod account;
-/// ## Auth
-/// Holds authentication structs
-pub mod auth;
 /// ## Registry
 /// Holds Farcaster ID/Name Registry
 pub mod registry;
