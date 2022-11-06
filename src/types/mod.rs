@@ -16,5 +16,3 @@ pub mod account;
 /// ## Registry
 /// Holds Farcaster ID/Name Registry
 pub mod registry;
-
-pub mod v2;
