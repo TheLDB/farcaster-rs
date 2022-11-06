@@ -77,7 +77,7 @@ impl FarcasterAccount {
     }
 
     /// Revokes a specific session token
-    pub async fn revoke_session_token(&mut self) -> Result<(), Box<dyn Error>> {
+    pub async fn revoke_auth_token(&mut self) -> Result<(), Box<dyn Error>> {
         // Return error if no session token is present
         if self.session_token.is_none() {
             return Err(Box::from("No session token present"));
