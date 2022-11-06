@@ -38,7 +38,7 @@ impl FarcasterAccount {
     }
 
     /// returns authentication token
-    pub async fn auth_token(&mut self) -> Result<&str, Box<dyn Error>> {
+    pub async fn get_auth_token(&mut self) -> Result<&str, Box<dyn Error>> {
         // prepare session token, if not ready
         if self.session_token.is_none() {
             self.get_session_token().await?;
