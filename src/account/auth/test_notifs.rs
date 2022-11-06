@@ -1,5 +1,5 @@
 use crate::{
-    constants::api_root::API_ROOT, types::auth::secret::Secret, types::v2::user::UserRoot,
+    constants::merkle::API_ROOT, types::account::auth::secret::Secret, types::user::user::UserRoot,
     Farcaster,
 };
 
