@@ -45,9 +45,9 @@ To connect to and use Farcaster API you need Ethereum provider HTTP endpoint alo
 or private key of an existing Farcaster account.
 
 ```rust
-use farcaster_rs::{Farcaster, FarcasterAccount};
+use farcaster_rs::{Account, Farcaster};
 
-let account = FarcasterAccount::from_mnemonic("top secret mnemonic phrase");
+let account = Account::from_mnemonic("top secret mnemonic phrase");
 let farcaster = Farcaster::new("https://ethereum.provider/api", account).await?;
 
 let landon = farcaster.get_user_by_username("lndnnft").await.unwrap();

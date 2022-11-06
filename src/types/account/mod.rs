@@ -10,7 +10,7 @@ use ethers::signers::Wallet;
 /// Farcaster account
 /// holds account keypair and Merkle v2 API token
 #[derive(Debug)]
-pub struct FarcasterAccount {
+pub struct Account {
     pub(crate) wallet: Wallet<SigningKey>,
     pub(crate) bearer_token: Option<Bearer>,
     pub(crate) session_token: Option<SecretToken>,

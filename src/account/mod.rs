@@ -1,13 +1,13 @@
 pub mod auth;
 
 use crate::constants::merkle::AUTH_TOKEN_DEFAULT_DURATION_SECS;
-use crate::types::account::FarcasterAccount;
+use crate::types::account::Account;
 use chrono::Utc;
 use ethers::signers::coins_bip39::English;
 use ethers::signers::{LocalWallet, MnemonicBuilder};
 use std::error::Error;
 
-impl FarcasterAccount {
+impl Account {
     /// create Farcaster account using mnemonic phrase
     pub fn from_mnemonic(mnemonic_phrase: &str) -> Self {
         let wallet = MnemonicBuilder::<English>::default()
