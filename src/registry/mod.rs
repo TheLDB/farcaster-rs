@@ -59,7 +59,7 @@ impl Registry {
     /// get address assigned to `username`
     /// returns None if not found
     pub fn get_address_by_username(&self, username: &str) -> Option<&str> {
-        if let Some(address) = self.fnr.get(&String::from(username)) {
+        if let Some(address) = self.fnr.get(username) {
             return Some(address);
         }
 
