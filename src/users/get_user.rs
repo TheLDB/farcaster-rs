@@ -9,15 +9,9 @@ impl Farcaster {
     pub async fn get_user_by_fid(&self, fid: u64) -> Result<UserInfo, Box<dyn Error>> {
         // make sure fid exists
         if let Some(_addr) = self.registry.get_address_by_fid(fid) {
-            let response = reqwest::Client::new()
-                .get(format!("{}/v2/user?fid={}", API_ROOT, fid))
-                .header("Content-Type", "application/json")
-                .header("Authorization", self.account.get_auth_token()?)
-                .send()
-                .await?
-                .text()
+            let response = self
+                .reqwest_get(&format!("{}/v2/user?fid={}", API_ROOT, fid))
                 .await?;
-
             let user_root: UserRoot = serde_json::from_str(&response)?;
 
             return Ok(user_root.result.user);
