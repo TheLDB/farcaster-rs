@@ -9,49 +9,63 @@ use std::error::Error;
 
 impl Account {
     /// create Farcaster account using mnemonic phrase
-    pub fn from_mnemonic(mnemonic_phrase: &str) -> Self {
+    pub async fn from_mnemonic(mnemonic_phrase: &str) -> Result<Self, Box<dyn Error>> {
         let wallet = MnemonicBuilder::<English>::default()
             .phrase(mnemonic_phrase)
             .build()
             // TODO: avoid panics
             .expect("Wallet creation using mnemonic phrase failed");
 
-        Self {
+        let mut account = Self {
             wallet,
             bearer_token: None,
             session_token: None,
             token_duration_secs: Some(AUTH_TOKEN_DEFAULT_DURATION_SECS),
-        }
+        };
+
+        // generate Bearer Token
+        account.generate_bearer().await?;
+
+        // generate Auth Token
+        account.get_session_token().await?;
+
+        Ok(account)
     }
 
     /// create Farcaster account using private key
-    pub fn from_private_key(key: &str) -> Self {
+    pub async fn from_private_key(key: &str) -> Result<Self, Box<dyn Error>> {
         let wallet = key
             .parse::<LocalWallet>()
             // TODO: avoid panics
             .expect("Wallet creation using private key failed");
 
-        Self {
+        let mut account = Self {
             wallet,
             bearer_token: None,
             session_token: None,
             token_duration_secs: Some(AUTH_TOKEN_DEFAULT_DURATION_SECS),
-        }
+        };
+
+        // generate Bearer Token
+        account.generate_bearer().await?;
+
+        // generate Auth Token
+        account.get_session_token().await?;
+
+        Ok(account)
     }
 
     /// returns authentication token
-    pub async fn get_auth_token(&mut self) -> Result<&str, Box<dyn Error>> {
+    pub fn get_auth_token(&self) -> Result<&str, Box<dyn Error>> {
         // prepare session token, if not ready
         if self.session_token.is_none() {
-            self.get_session_token().await?;
+            return Err(Box::from("Auth Token not ready"));
         }
 
         // check if token has expired
         let timestamp = Utc::now().timestamp_millis();
         if timestamp > self.session_token.as_ref().unwrap().expires_at {
-            // refresh token
-            self.bearer_token = None;
-            self.get_session_token().await?;
+            return Err(Box::from("Auth Token expired"));
         }
 
         Ok(&self.session_token.as_ref().unwrap().secret)

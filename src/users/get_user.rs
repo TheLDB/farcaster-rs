@@ -1,5 +1,5 @@
-//use crate::constants::merkle::API_ROOT;
-//use crate::types::user::user::UserRoot;
+use crate::constants::merkle::API_ROOT;
+use crate::types::user::user::UserRoot;
 use crate::types::user::UserInfo;
 use crate::Farcaster;
 use std::error::Error;
@@ -9,13 +9,12 @@ impl Farcaster {
     pub async fn get_user_by_fid(&self, fid: u64) -> Result<UserInfo, Box<dyn Error>> {
         // make sure fid exists
         if let Some(_addr) = self.registry.get_address_by_fid(fid) {
-            // TODO: this is still v1 API !
-            //let user = reqwest::get(format!("https://api.farcaster.xyz/v1/profiles/{}", address))
-            //    .await?
-            //    .text()
-            //    .await?;
-            //let user_root: UserRoot = serde_json::from_str(&user)?;
-            //return Ok(user_root.result.user);
+            let response = self
+                .reqwest_get(&format!("{}/v2/user?fid={}", API_ROOT, fid))
+                .await?;
+            let user_root: UserRoot = serde_json::from_str(&response)?;
+
+            return Ok(user_root.result.user);
         }
 
         Err(Box::from(format!(

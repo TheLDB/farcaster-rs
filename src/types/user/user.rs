@@ -16,41 +16,26 @@ pub struct UserInfo {
     pub username: String,
     #[serde(rename = "displayName")]
     pub display_name: String,
-    pub avatar: Avatar,
+    pub pfp: Pfp,
     #[serde(rename = "followerCount")]
     pub follower_count: i64,
     #[serde(rename = "followingCount")]
     pub following_count: i64,
-    #[serde(rename = "isViewerFollowing")]
-    pub is_viewer_following: bool,
-    #[serde(rename = "isFollowingViewer")]
-    pub is_following_viewer: bool,
-    pub profile: Profile,
+    #[serde(rename = "viewerContext")]
+    pub viewer_content: ViewerContext,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct Avatar {
+pub struct Pfp {
     pub url: String,
-    #[serde(rename = "isVerified")]
-    pub is_verified: bool,
+    pub verified: bool,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct Profile {
-    pub bio: Bio,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct Bio {
-    pub text: String,
-    pub mentions: Vec<Mention>,
-}
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct Mention {
-    pub avatar: Avatar,
-    pub fid: i64,
-    pub username: String,
-    #[serde(rename = "displayName")]
-    pub display_name: String,
+pub struct ViewerContext {
+    pub following: bool,
+    #[serde(rename = "followedBy")]
+    pub followed_by: bool,
+    #[serde(rename = "canSendDirectCasts")]
+    pub can_send_direct_casts: bool,
 }
