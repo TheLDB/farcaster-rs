@@ -13,7 +13,6 @@ impl Account {
         let wallet = MnemonicBuilder::<English>::default()
             .phrase(mnemonic_phrase)
             .build()
-            // TODO: avoid panics
             .expect("Wallet creation using mnemonic phrase failed");
 
         let mut account = Self {
@@ -36,7 +35,6 @@ impl Account {
     pub async fn from_private_key(key: &str) -> Result<Self, Box<dyn Error>> {
         let wallet = key
             .parse::<LocalWallet>()
-            // TODO: avoid panics
             .expect("Wallet creation using private key failed");
 
         let mut account = Self {
