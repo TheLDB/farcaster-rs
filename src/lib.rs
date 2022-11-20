@@ -14,7 +14,7 @@ use std::error::Error;
 #[derive(Debug)]
 pub struct Farcaster {
     #[allow(dead_code)]
-    pub(crate) account: Account,
+    pub account: Account,
     pub registry: Registry,
 }
 
