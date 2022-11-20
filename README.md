@@ -1,8 +1,8 @@
-<div align="center">
-    <img src="https://raw.githubusercontent.com/TheLDB/farcaster-rs/main/assets/banner.png" >
+<div>
+    <img alt="farcaster-rs" align="center" src="https://raw.githubusercontent.com/TheLDB/farcaster-rs/main/assets/banner.png" />
     <h1 align="center">farcaster-rs</h1>
-     <h3 align="center">🚀 A simple & easy way to interface with <a href="https://farcaster.xyz">Farcaster</a> via <span style="color: #dea584;">Rust 🦀</span></h1>
-     <p>Author: Landon Boles</p>
+     <h3 align="center">🚀 A simple & easy way to interface with <a href="https://farcaster.xyz">Farcaster</a> via <span style="color: #dea584;">Rust 🦀</span></h3>
+     <p align="Center">Author: Landon Boles</p>
      <div align="center" style="display: flex; justify-content: center;">
         <a href="https://github.com/TheLDB" style="padding-right: 5px;">GitHub</a>
         <p> | </p>
@@ -44,7 +44,7 @@ Once you have the crate installed, you can start using the crate!
 To connect to and use Farcaster API you need Ethereum provider HTTP endpoint along with mnemonic phrase
 or private key of an existing Farcaster account.
 
-```rust
+```
 use farcaster_rs::{Account, Farcaster};
 
 let account = Account::from_mnemonic("top secret mnemonic phrase");
