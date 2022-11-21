@@ -13,7 +13,7 @@ impl Farcaster {
             }
         });
 
-        let _revoke_reqwest: String = reqwest::Client::new()
+        let _revoke_reqwest = reqwest::Client::new()
             .delete(format!("{}/v2/auth", API_ROOT))
             .header("Content-Type", "application/json")
             .header("Authorization", &token.secret)
@@ -22,6 +22,8 @@ impl Farcaster {
             .await?
             .text()
             .await?;
+
+        println!("{:#?}", _revoke_reqwest);
 
         // API not yet implemented- refer back when structure is available
 

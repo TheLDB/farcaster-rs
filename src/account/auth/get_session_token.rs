@@ -23,7 +23,8 @@ impl Farcaster {
             .text()
             .await?;
 
-        let secret: Secret = serde_json::from_str(&session_reqwest)?;
+        let mut secret: Secret = serde_json::from_str(&session_reqwest)?;
+        secret.result.token.secret = format!("Bearer: {}", secret.result.token.secret);
 
         Ok(secret.result.token)
     }
