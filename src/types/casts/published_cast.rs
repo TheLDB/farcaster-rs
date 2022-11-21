@@ -1,6 +1,5 @@
-use serde_json::Value;
 use serde::{Deserialize, Serialize};
-
+use serde_json::Value;
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]

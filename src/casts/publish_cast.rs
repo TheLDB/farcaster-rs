@@ -1,3 +1,5 @@
+use crate::constants::merkle::API_ROOT;
+use crate::types::casts::published_cast::PublishedCast;
 use crate::Farcaster;
 use chrono::offset::Utc;
 use ethers::{
@@ -5,16 +7,13 @@ use ethers::{
     signers::{Signer, Wallet},
 };
 use serde_json::{json, Value};
-use crate::constants::merkle::API_ROOT;
-use crate::types::casts::published_cast::PublishedCast;
 
 impl Farcaster {
     pub async fn publish_cast(
         &self,
         fid: u64,
-        content: &str
+        content: &str,
     ) -> Result<PublishedCast, Box<dyn std::error::Error>> {
-
         let payload: Value = json!({
             "fid": fid,
             "timestamp": Utc::now().timestamp_millis(),
@@ -24,7 +23,10 @@ impl Farcaster {
         let publish_cast_reqwest = reqwest::Client::new()
             .post(format!("{}/v2/casts", API_ROOT))
             .header("Content-Type", "application/json")
-            .header("Authorization", &self.account.session_token.as_ref().unwrap().secret)
+            .header(
+                "Authorization",
+                &self.account.session_token.as_ref().unwrap().secret,
+            )
             .json(&payload)
             .send()
             .await?
