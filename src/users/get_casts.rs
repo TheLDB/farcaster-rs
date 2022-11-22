@@ -1,27 +1,75 @@
 use crate::types::casts::casts::{Cast, CastRoot};
 use crate::Farcaster;
 use std::error::Error;
+use crate::constants::merkle::API_ROOT;
 
 impl Farcaster {
-
     // fetches all Casts for a given `username` from newest to oldest
-    pub async fn get_casts_by_username(
-        &self,
-        username: &str,
-    ) -> Result<Vec<Cast>, Box<dyn std::error::Error>> {
-        self.get_casts_by_username_with_limit(username, 0).await
-    }
+    // pub async fn get_casts_by_username(
+    //     &self,
+    //     username: &str,
+    // ) -> Result<Vec<Cast>, Box<dyn std::error::Error>> {
+    //     self.get_casts_by_username_with_limit(username, 0).await
+    // }
 
     // V2 Implementation of the get casts w/ limit function
-    pub async fn get_casts_by_username_with_limit(
+    pub async fn get_casts_by_fid_with_limit(
         &self,
         fid: u64,
-        max_casts: usize
-    ) -> Result<(), Box<dyn Error>> {
-        Ok(())
+        max_casts: usize,
+    ) -> Result<Vec<Cast>, Box<dyn Error>> {
+        let mut casts: Vec<Cast> = Vec::new();
+        let mut fetch_url = format!("{}/v2/casts?fid={}", API_ROOT, fid);
+
+        let read_limit = match max_casts {
+            0 => usize::MAX,
+            _ => max_casts
+        };
+
+        while casts.len() < read_limit {
+            let response = reqwest::Client::new()
+                .get(&fetch_url)
+                .header("Authorization", &self.account.session_token.as_ref().unwrap().secret)
+                .send()
+                .await?
+                .text()
+                .await?;
+
+            // Weird edge case, literally only happens once throughout every post. Thanks.
+            let response = response.replace(r#"\ud835"#, "\u{fffd}");
+
+            let cast_root: Result<CastRoot, serde_json::Error> = serde_json::from_str(&response);
+
+            match cast_root {
+                Ok(cast) => {
+                    casts.extend(cast.result.casts);
+
+                    if let Some(next_url) = cast.next {
+                        if let Some(cursor_url) = next_url.cursor {
+                            fetch_url = format!("{}/v2/casts?fid={}&cursor={}", API_ROOT, fid, cursor_url);
+                        }
+                        else {
+                            break;
+                        }
+                    }
+                    else {
+                        break;
+                    }
+                },
+                Err(e) => {
+                    println!("{}", response);
+                    println!("{}", e);
+                }
+            }
+        }
+
+        if max_casts > 0 {
+            casts.truncate(max_casts);
+        }
+
+        Ok(casts)
     }
-    /// fetches latest Casts for a given `username` up to `max_casts`
-    /// if `max_casts` is zero fetches all available casts
+
     // pub async fn get_casts_by_username_with_limit(
     //     &self,
     //     username: &str,
