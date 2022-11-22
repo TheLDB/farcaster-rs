@@ -9,13 +9,11 @@ use ethers::{
 use serde_json::{json, Value};
 
 impl Farcaster {
-    pub async fn publish_cast(
+    pub async fn publish_simple_cast(
         &self,
-        fid: u64,
         content: &str,
     ) -> Result<PublishedCast, Box<dyn std::error::Error>> {
         let payload: Value = json!({
-            "fid": fid,
             "timestamp": Utc::now().timestamp_millis(),
             "text": content
         });
