@@ -1,9 +1,9 @@
-use std::error::Error;
-use crate::{CastBuilder, Farcaster};
-use chrono::offset::Utc;
-use serde_json::{Value, json};
 use crate::constants::merkle::API_ROOT;
 use crate::types::casts::published_cast::PublishedCast;
+use crate::{CastBuilder, Farcaster};
+use chrono::offset::Utc;
+use serde_json::{json, Value};
+use std::error::Error;
 
 impl CastBuilder {
     // pub fn new() -> &'static mut Self {
@@ -24,84 +24,75 @@ impl CastBuilder {
         CastBuilder {
             content: None,
             embeds: None,
-            mentions: None
+            mentions: None,
         }
     }
 
-    pub fn content(&self, content: &str) -> Self {
-        let embeds = self.embeds.clone();
-        let mentions = self.mentions.clone();
+    #[allow(clippy::needless_lifetimes)]
+    pub fn content<'a>(&'a mut self, content: &str) -> &'a mut Self {
+        self.content = Some(content.to_string());
 
-        CastBuilder {
-            content: Some(content.to_string()),
-            embeds,
-            mentions,
-        }
+        self
     }
 
-    pub fn embed(&self, embed: &str) -> Result<Self, Box<dyn Error>> {
-        let content = self.content.clone();
-        let mentions = self.mentions.clone();
-
-        let mut new_embeds: Vec<String> = Vec::new();
-
-        if let Some(embeds) = self.embeds.clone() {
-            println!("{}", embeds.len());
-            for i in embeds {
-                new_embeds.push(i);
+    #[allow(clippy::needless_lifetimes)]
+    pub fn embed<'a>(&'a mut self, embed: &str) -> Result<&'a mut Self, Box<dyn Error>> {
+        if let Some(mut embeds) = self.embeds.clone() {
+            if embeds.len() > 1 {
+                return Err(Box::from("You cannot have more than two embeds in a cast"));
             }
-        }
 
-
-        if new_embeds.len() > 1 {
-            Err(Box::from("You cannot have more than two embeds"))
+            embeds.push(embed.to_string());
+            self.embeds = Some(embeds);
         }
         else {
-            new_embeds.push(embed.to_string());
-
-            Ok(CastBuilder {
-                content,
-                embeds: Some(new_embeds),
-                mentions
-            })
+            self.embeds = Some(vec![embed.to_string()]);
         }
+
+        Ok(self)
     }
 
-    pub fn mention(&self, mention: &str) -> Result<Self, Box<dyn Error>> {
-        let content = self.content.clone();
-        let embeds = self.embeds.clone();
-
-        let mut new_mentions: Vec<String> = Vec::new();
-
-        if let Some(mentions) = self.mentions.clone() {
-            for i in mentions {
-                new_mentions.push(i)
+    #[allow(clippy::needless_lifetimes)]
+    pub fn mention<'a>(&'a mut self, mention: &str) -> Result<&'a mut Self, Box<dyn Error>> {
+        if let Some(mut mentions) = self.mentions.clone() {
+            if mentions.len() > 4 {
+                return Err(Box::from("You cannot have more than four mentions in a cast"));
             }
-        }
 
-        if new_mentions.len() > 4 {
-            Err(Box::from("You cannot have more than five embeds"))
+            mentions.push(mention.to_string());
+            self.mentions = Some(mentions);
         }
         else {
-            Ok(CastBuilder {
-                content,
-                mentions: Some(new_mentions),
-                embeds
-            })
+            self.mentions = Some(vec![mention.to_string()]);
         }
 
+        Ok(self)
     }
 
     pub async fn cast(&self, farcaster: &Farcaster) -> Result<PublishedCast, Box<dyn Error>> {
-        let text = self.content.clone().unwrap();
-        let embeds = self.embeds.clone().unwrap();
-        let mentions = self.mentions.clone().unwrap();
+        let mut all_embeds: Vec<&String> = Vec::new();
+        let mut all_mentions: Vec<&String> = Vec::new();
+
+        let content = self.content.clone().unwrap_or("".to_string());
+
+        if let Some(embeds) = &self.embeds {
+            for i in embeds {
+                all_embeds.push(i);
+            }
+        }
+
+        if let Some(mentions) = &self.mentions {
+            for i in mentions {
+                all_mentions.push(i)
+            }
+        }
+
 
         let payload: Value = json!({
             "timestamp": Utc::now().timestamp_millis(),
-            "text": text,
-            "embeds": embeds,
-            "mentions": mentions,
+            "text": content,
+            "embeds": all_embeds,
+            "mentions": all_mentions
         });
 
         let publish_cast_reqwest: String = reqwest::Client::new()
@@ -116,7 +107,6 @@ impl CastBuilder {
 
         let published_cast: PublishedCast = serde_json::from_str(&publish_cast_reqwest)?;
 
-        println!("{:#?}", published_cast);
         Ok(published_cast)
     }
 }

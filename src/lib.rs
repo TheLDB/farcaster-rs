@@ -6,8 +6,8 @@ pub mod registry;
 pub mod types;
 pub mod users;
 pub use types::account::Account;
-pub use types::registry::Registry;
 pub use types::casts::cast_builder::CastBuilder;
+pub use types::registry::Registry;
 
 use std::error::Error;
 

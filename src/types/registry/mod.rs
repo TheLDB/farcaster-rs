@@ -14,7 +14,6 @@ pub struct Registry {
     pub(crate) provider: Provider<Http>,     // Ethereum HTTP provider
 }
 
-
 /// holds Farcaster ID info from FIR
 #[derive(Debug)]
 pub struct FIDInfo {

@@ -4,5 +4,5 @@ use serde::{Deserialize, Serialize};
 pub struct CastBuilder {
     pub(crate) content: Option<String>,
     pub(crate) embeds: Option<Vec<String>>,
-    pub(crate) mentions: Option<Vec<String>>
+    pub(crate) mentions: Option<Vec<String>>,
 }
