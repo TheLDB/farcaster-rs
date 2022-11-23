@@ -7,11 +7,12 @@ use std::error::Error;
 
 impl CastBuilder {
     pub fn new() -> Self {
-        CastBuilder {
+        Self {
             content: "".to_string(),
             embeds: Vec::new(),
             mentions: Vec::new(),
-            parent_cast_hash: "0x0949d486b6434843a94e0ec36b8ee48d411a05fe10999c7f603feef13ef64552".to_string()
+            parent_cast_hash: "0x0949d486b6434843a94e0ec36b8ee48d411a05fe10999c7f603feef13ef64552"
+                .to_string(),
         }
     }
 
