@@ -2,10 +2,7 @@ use crate::constants::merkle::API_ROOT;
 use crate::types::casts::published_cast::PublishedCast;
 use crate::Farcaster;
 use chrono::offset::Utc;
-use ethers::{
-    prelude::k256::ecdsa::SigningKey,
-    signers::{Signer, Wallet},
-};
+
 use serde_json::{json, Value};
 
 impl Farcaster {

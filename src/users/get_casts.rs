@@ -1,7 +1,7 @@
+use crate::constants::merkle::API_ROOT;
 use crate::types::casts::casts::{Cast, CastRoot};
 use crate::Farcaster;
 use std::error::Error;
-use crate::constants::merkle::API_ROOT;
 
 impl Farcaster {
     // fetches all Casts for a given `username` from newest to oldest
@@ -23,13 +23,16 @@ impl Farcaster {
 
         let read_limit = match max_casts {
             0 => usize::MAX,
-            _ => max_casts
+            _ => max_casts,
         };
 
         while casts.len() < read_limit {
             let response = reqwest::Client::new()
                 .get(&fetch_url)
-                .header("Authorization", &self.account.session_token.as_ref().unwrap().secret)
+                .header(
+                    "Authorization",
+                    &self.account.session_token.as_ref().unwrap().secret,
+                )
                 .send()
                 .await?
                 .text()
@@ -46,16 +49,15 @@ impl Farcaster {
 
                     if let Some(next_url) = cast.next {
                         if let Some(cursor_url) = next_url.cursor {
-                            fetch_url = format!("{}/v2/casts?fid={}&cursor={}", API_ROOT, fid, cursor_url);
-                        }
-                        else {
+                            fetch_url =
+                                format!("{}/v2/casts?fid={}&cursor={}", API_ROOT, fid, cursor_url);
+                        } else {
                             break;
                         }
-                    }
-                    else {
+                    } else {
                         break;
                     }
-                },
+                }
                 Err(e) => {
                     println!("{}", response);
                     println!("{}", e);
