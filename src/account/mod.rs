@@ -9,7 +9,10 @@ use std::error::Error;
 
 impl Account {
     /// create Farcaster account using mnemonic phrase
-    pub async fn from_mnemonic(mnemonic_phrase: &str, token_duration: Option<i64>) -> Result<Self, Box<dyn Error>> {
+    pub async fn from_mnemonic(
+        mnemonic_phrase: &str,
+        token_duration: Option<i64>,
+    ) -> Result<Self, Box<dyn Error>> {
         let wallet = MnemonicBuilder::<English>::default()
             .phrase(mnemonic_phrase)
             .build()
@@ -34,7 +37,10 @@ impl Account {
     }
 
     /// create Farcaster account using private key
-    pub async fn from_private_key(key: &str, token_duration: Option<i64>) -> Result<Self, Box<dyn Error>> {
+    pub async fn from_private_key(
+        key: &str,
+        token_duration: Option<i64>,
+    ) -> Result<Self, Box<dyn Error>> {
         let wallet = key
             .parse::<LocalWallet>()
             .expect("Wallet creation using private key failed");
@@ -94,10 +100,17 @@ impl Account {
         Ok(())
     }
 
-    pub async fn regen_session_token(&mut self) -> Result<(), Box<dyn Error>> {
-        self.bearer_token = Some(crate::Farcaster::generate_bearer(&self.wallet, self.token_duration_secs).await?);
 
-        self.session_token = Some(crate::Farcaster::get_session_token(&self.bearer_token.as_ref().unwrap()).await?);
+    /// Function to regenete your session token.
+    /// Ideal for bots. Regenerate every hour to secure your token.
+    pub async fn regen_session_token(&mut self, token_duration: Option<i64>) -> Result<(), Box<dyn Error>> {
+        let token_duration_secs = token_duration.unwrap_or(self.token_duration_secs.unwrap_or(AUTH_TOKEN_DEFAULT_DURATION_SECS));
+
+        self.bearer_token =
+            Some(crate::Farcaster::generate_bearer(&self.wallet, Some(token_duration_secs)).await?);
+
+        self.session_token =
+            Some(crate::Farcaster::get_session_token(&self.bearer_token.as_ref().unwrap()).await?);
 
         Ok(())
     }
