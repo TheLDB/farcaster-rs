@@ -9,17 +9,19 @@ use std::error::Error;
 
 impl Account {
     /// create Farcaster account using mnemonic phrase
-    pub async fn from_mnemonic(mnemonic_phrase: &str) -> Result<Self, Box<dyn Error>> {
+    pub async fn from_mnemonic(mnemonic_phrase: &str, token_duration: Option<i64>) -> Result<Self, Box<dyn Error>> {
         let wallet = MnemonicBuilder::<English>::default()
             .phrase(mnemonic_phrase)
             .build()
             .expect("Wallet creation using mnemonic phrase failed");
 
+        let token_duration_secs = token_duration.unwrap_or(AUTH_TOKEN_DEFAULT_DURATION_SECS);
+
         let mut account = Self {
             wallet,
             bearer_token: None,
             session_token: None,
-            token_duration_secs: Some(AUTH_TOKEN_DEFAULT_DURATION_SECS),
+            token_duration_secs: Some(token_duration_secs),
         };
 
         // generate Bearer Token
@@ -32,16 +34,18 @@ impl Account {
     }
 
     /// create Farcaster account using private key
-    pub async fn from_private_key(key: &str) -> Result<Self, Box<dyn Error>> {
+    pub async fn from_private_key(key: &str, token_duration: Option<i64>) -> Result<Self, Box<dyn Error>> {
         let wallet = key
             .parse::<LocalWallet>()
             .expect("Wallet creation using private key failed");
+
+        let token_duration_secs = token_duration.unwrap_or(AUTH_TOKEN_DEFAULT_DURATION_SECS);
 
         let mut account = Self {
             wallet,
             bearer_token: None,
             session_token: None,
-            token_duration_secs: Some(AUTH_TOKEN_DEFAULT_DURATION_SECS),
+            token_duration_secs: Some(token_duration_secs),
         };
 
         // generate Bearer Token
@@ -86,6 +90,14 @@ impl Account {
 
         self.session_token =
             Some(crate::Farcaster::get_session_token(&self.bearer_token.as_ref().unwrap()).await?);
+
+        Ok(())
+    }
+
+    pub async fn regen_session_token(&mut self) -> Result<(), Box<dyn Error>> {
+        self.bearer_token = Some(crate::Farcaster::generate_bearer(&self.wallet, self.token_duration_secs).await?);
+
+        self.session_token = Some(crate::Farcaster::get_session_token(&self.bearer_token.as_ref().unwrap()).await?);
 
         Ok(())
     }
