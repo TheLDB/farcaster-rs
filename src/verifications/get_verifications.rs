@@ -4,6 +4,7 @@ use crate::Farcaster;
 use crate::types::verifications::verifications::VerificationsRoot;
 
 impl Farcaster {
+    /// Get verifications of a user by their FID
     pub async fn get_verifications_by_fid(&self, fid: i64) -> Result<VerificationsRoot, Box<dyn Error>> {
         let verifications_reqwest = &self.reqwest_get(format!("{}/v2/verifications?fid={}", API_ROOT, fid).as_str()).await?;
 
@@ -12,6 +13,7 @@ impl Farcaster {
         Ok(verifications)
     }
 
+    /// Get verifications of a user by their username
     pub async fn get_verifications_by_username(&self, username: &str) -> Result<VerificationsRoot, Box<dyn Error>> {
         let fid = &self.get_user_by_username(username).await?;
 
@@ -20,6 +22,7 @@ impl Farcaster {
         Ok(verifications.clone())
     }
 
+    /// Get verifications of a user by their address
     pub async fn get_verifications_by_address(&self, address: &str) -> Result<VerificationsRoot, Box<dyn Error>> {
         let fid = &self.get_user_by_address(address).await?;
 

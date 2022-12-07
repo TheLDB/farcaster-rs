@@ -4,6 +4,7 @@ use crate::Farcaster;
 use crate::types::user::user::UserRoot;
 
 impl Farcaster {
+    /// Get information about the authenticated user
     pub async fn get_me(&self) -> Result<UserRoot, Box<dyn Error>> {
         let me_reqwest = &self.reqwest_get(format!("{}/v2/me", API_ROOT).as_str()).await?;
 
