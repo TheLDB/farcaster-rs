@@ -1,17 +1,20 @@
 [package]
 name = "farcaster-rs"
 version = "1.0.0"
-description="A simple rust crate to interface & interact with the Farcaster.xyz contracts & APIs"
+description="A rust crate to interface & interact with the Farcaster.xyz contracts & APIs"
 repository="https://github.com/TheLDB/farcaster-rs"
-authors=["Landon Boles"]
+authors=["Landon Boles <ldb@erikboles.com>"]
 license="MIT"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-hex = "0.4.3"
-base64 = "0.13.1"
+
+[dependencies.hex]
+version = "0.4.3"
+
+[dependencies.base64]
+version = "0.13.1"
 
 [dependencies.ethers]
 git = "https://github.com/gakonst/ethers-rs"
