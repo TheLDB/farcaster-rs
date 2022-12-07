@@ -1,56 +1,48 @@
-use crate::types::abi::registry::Registry;
-use crate::types::logs::events::Events;
-use crate::types::user::user::Root;
+use crate::constants::merkle::API_ROOT;
+use crate::types::user::user::{UserInfo, UserRoot};
 use crate::Farcaster;
+use std::error::Error;
 
 impl Farcaster {
-    /// # Get the details of a user
-    ///
-    /// ## Arguments
-    ///
-    /// * `self: &Farcaster`
-    ///     - Takes in a type of Farcaster which is created at the start with ``Farcaster::new("client");``
-    ///
-    /// * `username: &str`
-    ///     - The username you want to fetch casts for
-    ///
-    /// ## Usage
-    /// ```
-    /// let farcaster = Farcaster::new("");
-    ///
-    /// let user = farcaster.get_user_by_username("lndnnft").await.unwrap();
-    ///
-    /// println!("{:#?}", user);
-    /// ```
-    pub async fn get_user_by_username(
-        &self,
-        username: &str,
-    ) -> Result<Root, Box<dyn std::error::Error>> {
-        let name_registry_logs = self.get_name_registry_logs().await?;
-
-        let username = String::from(username);
-
-        for name in name_registry_logs {
-            let parsed_log = &self
-                .parse_log(name, Registry::NAME, Events::Transfer)
+    /// Get information about a user via their Farcaster ID (more commonly shortened to FID throughout this codebase
+    pub async fn get_user_by_fid(&self, fid: u64) -> Result<UserInfo, Box<dyn Error>> {
+        // make sure fid exists
+        if let Some(_addr) = self.registry.get_address_by_fid(fid) {
+            let response = self
+                .reqwest_get(&format!("{}/v2/user?fid={}", API_ROOT, fid))
                 .await?;
-            let token_id = parsed_log.params.get(2).unwrap();
-            let fname = Farcaster::token_to_fname(token_id.value.clone()).await?;
-            if fname == username {
-                let address = parsed_log.params.get(1).unwrap();
-                let address = format!("0x{}", address.value.to_string());
-                let user =
-                    reqwest::get(format!("https://api.farcaster.xyz/v1/profiles/{}", address))
-                        .await?
-                        .text()
-                        .await?;
-                let user: Root = serde_json::from_str(&user)?;
-                return Ok(user);
-            }
+            let user_root: UserRoot = serde_json::from_str(&response)?;
+
+            return Ok(user_root.result.user);
         }
 
-        Err(Box::from(
-            "Unable to fetch Name Registry Logs - Fatal Error",
-        ))
+        Err(Box::from(format!(
+            "FID '{}' not found in Farcaster ID Registry",
+            fid
+        )))
+    }
+
+    /// Get information about a user via their Farcaster Username
+    pub async fn get_user_by_username(&self, username: &str) -> Result<UserInfo, Box<dyn Error>> {
+        if let Some(fid) = self.registry.get_fid_by_username(username) {
+            return self.get_user_by_fid(fid).await;
+        }
+
+        Err(Box::from(format!(
+            "User '{}' not found in Farcaster Name Registry",
+            username
+        )))
+    }
+
+    /// Get information about a user via their Ethereum address
+    pub async fn get_user_by_address(&self, address: &str) -> Result<UserInfo, Box<dyn Error>> {
+        if let Some(fid) = self.registry.get_fid_by_address(address) {
+            return self.get_user_by_fid(fid).await;
+        }
+
+        Err(Box::from(format!(
+            "Address '{}' not found in Farcaster ID Registry",
+            address
+        )))
     }
 }

@@ -1,59 +1,43 @@
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 
-/// # User Root Struct
-///
-/// When getting a user, we need structs to Deserialize the JSON into
-///
-/// This struct holds one value
-///
-/// * `result: Result`
-///     - Result holds a User type, which itself holds a lot of the user data
-///     - To view more about the data types, explore the many structs in this file.
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Root {
+#[derive(Debug, Deserialize, Serialize)]
+pub struct UserRoot {
     pub result: Result,
 }
 
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
+#[derive(Debug, Deserialize, Serialize)]
 pub struct Result {
-    pub user: User,
+    pub user: UserInfo,
 }
 
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct User {
-    pub address: String,
+#[derive(Debug, Deserialize, Serialize)]
+pub struct UserInfo {
+    pub fid: i64,
     pub username: String,
+    #[serde(rename = "displayName")]
     pub display_name: String,
-    pub avatar: Avatar,
+    pub pfp: Pfp,
+    #[serde(rename = "followerCount")]
     pub follower_count: i64,
+    #[serde(rename = "followingCount")]
     pub following_count: i64,
-    pub is_viewer_following: bool,
-    pub is_following_viewer: bool,
-    pub profile: Profile,
+    #[serde(rename = "referrerUsername")]
     pub referrer_username: Option<String>,
-    pub viewer_can_send_direct_casts: bool,
+    #[serde(rename = "viewerContext")]
+    pub viewer_content: ViewerContext,
 }
 
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Avatar {
+#[derive(Debug, Deserialize, Serialize)]
+pub struct Pfp {
     pub url: String,
-    pub is_verified: bool,
+    pub verified: bool,
 }
 
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Profile {
-    pub bio: Bio,
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Bio {
-    pub text: String,
-    pub mentions: Vec<Value>,
+#[derive(Debug, Deserialize, Serialize)]
+pub struct ViewerContext {
+    pub following: bool,
+    #[serde(rename = "followedBy")]
+    pub followed_by: bool,
+    #[serde(rename = "canSendDirectCasts")]
+    pub can_send_direct_casts: bool,
 }
