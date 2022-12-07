@@ -2,7 +2,7 @@ use std::error::Error;
 use crate::constants::merkle::API_ROOT;
 use crate::Farcaster;
 use crate::types::casts::CastRoot;
-use crate::types::user::UserInfo;
+use crate::types::user::user::UserInfo;
 
 impl Farcaster {
     pub async fn get_casts_by_fid(&self, fid: i64,  limit: Option<i32>, cursor: Option<&str>) -> Result<CastRoot, Box<dyn Error>> {

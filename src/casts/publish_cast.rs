@@ -9,11 +9,28 @@ impl Farcaster {
     pub async fn publish_cast(
         &self,
         content: &str,
+        reply_to_hash: Option<&str>,
+        reply_to_fid: Option<i64>
     ) -> Result<PublishedCast, Box<dyn std::error::Error>> {
-        let payload: Value = json!({
-            "timestamp": Utc::now().timestamp_millis(),
-            "text": content
-        });
+        let payload: Value;
+
+        if reply_to_hash.is_some() && reply_to_fid.is_some() {
+            let parent_hash = reply_to_hash.unwrap();
+            let parent_fid = reply_to_fid.unwrap();
+
+            payload = json!({
+                "parent": {
+                    "hash": parent_hash,
+                    "fid": parent_fid
+                },
+                "text": content
+            })
+        }
+        else {
+            payload = json!({
+                "text": content
+            })
+        }
 
         let publish_cast_reqwest = reqwest::Client::new()
             .post(format!("{}/v2/casts", API_ROOT))

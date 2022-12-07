@@ -1,6 +1,5 @@
 use crate::constants::merkle::API_ROOT;
-use crate::types::user::user::UserRoot;
-use crate::types::user::UserInfo;
+use crate::types::user::user::{UserInfo, UserRoot};
 use crate::Farcaster;
 use std::error::Error;
 

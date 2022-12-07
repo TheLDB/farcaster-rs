@@ -25,7 +25,7 @@ impl Farcaster {
     pub async fn get_following_by_username(&self, username: &str, limit: Option<i64>, cursor: Option<&str>) -> Result<FollowersRoot, Box<dyn Error>> {
         let fid = &self.get_user_by_username(username).await?;
 
-        let following = &self.get_following_by_fid(fid.fid, limit, option).await?;
+        let following = &self.get_following_by_fid(fid.fid, limit, cursor).await?;
 
         Ok(following.clone())
     }

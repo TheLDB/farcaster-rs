@@ -21,12 +21,12 @@ impl Farcaster {
             .await?;
 
 
-        let unfollow: UnfollowUserRoot = serde_json::from_str(&follow_reqwest)?;
+        let unfollow: UnfollowUserRoot = serde_json::from_str(&unfollow_reqwest)?;
 
         Ok(unfollow)
     }
 
-    pub async fn follow_user_by_username(&self, username: &str) -> Result<UnfollowUserRoot, Box<dyn Error>> {
+    pub async fn unfollow_user_by_username(&self, username: &str) -> Result<UnfollowUserRoot, Box<dyn Error>> {
         let fid = &self.get_user_by_username(username).await?;
 
         let unfollow = &self.unfollow_user_by_fid(fid.fid).await?;
@@ -34,7 +34,7 @@ impl Farcaster {
         Ok(unfollow.clone())
     }
 
-    pub async fn follow_user_by_address(&self, address: &str) -> Result<UnfollowUserRoot, Box<dyn Error>> {
+    pub async fn unfollow_user_by_address (&self, address: &str) -> Result<UnfollowUserRoot, Box<dyn Error>> {
         let fid = &self.get_user_by_address(address).await?;
 
         let unfollow = &self.unfollow_user_by_fid(fid.fid).await?;

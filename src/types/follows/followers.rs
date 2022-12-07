@@ -30,6 +30,7 @@ pub struct Follower {
     pub viewer_context: SharedViewerContext
 }
 
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct FollowersNext {
     pub cursor: Option<String>
 }

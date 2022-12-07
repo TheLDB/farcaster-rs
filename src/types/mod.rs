@@ -6,9 +6,6 @@ pub mod casts;
 /// ## User
 /// Holds structs for user info, notifications, etc...
 pub mod user;
-/// ## Wallet
-/// Holds structs for wallets
-pub mod wallet;
 
 /// ## Account
 /// Holds Farcaster Account
