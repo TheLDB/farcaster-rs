@@ -23,6 +23,7 @@ pub struct Cast {
     pub reactions: Reactions,
     pub recasts: Recasts,
     pub watches: Watches,
+    pub recast: Option<bool>,
     #[serde(rename="viewerContext")]
     pub viewer_context: ViewerContext
 }
@@ -60,27 +61,41 @@ pub struct Bio {
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Replies {
-
+    pub count: i32
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Reactions {
-
+    pub count: i32,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Recasts {
+    pub count: i32,
+    pub recasters: Vec<Recasters>
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Recasters {
+    pub fid: i64,
+    pub username: String,
+    #[serde(rename="displayName")]
+    pub display_name: String,
+    #[serde(rename="recastHash")]
+    pub recast_hash: String
 
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Watches {
-
+    count: i32
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ViewerContext {
-
+    pub reacted: bool,
+    pub recast: bool,
+    pub watched: bool,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]

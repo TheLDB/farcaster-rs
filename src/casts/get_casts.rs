@@ -1,7 +1,7 @@
 use std::error::Error;
 use crate::constants::merkle::API_ROOT;
 use crate::Farcaster;
-use crate::types::casts::CastRoot;
+use crate::types::casts::casts::CastRoot;
 use crate::types::user::user::UserInfo;
 
 impl Farcaster {

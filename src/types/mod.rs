@@ -29,3 +29,7 @@ pub mod shared;
 /// ## Verifications
 /// Contains types relating to cryptographic proofs & verifications
 pub mod verifications;
+
+/// ## Notifications
+/// Contains types relating to notifications
+pub mod notifications;
