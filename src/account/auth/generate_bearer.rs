@@ -13,7 +13,10 @@ use crate::{
 use serde_json::{json, Value};
 
 impl Farcaster {
-    /// generates bearer token with optional duration
+    /// # Best not to use this function directly
+    /// Instead, use the [Account struct](../types/account/struct.Account.html) methods, such as from_mnemonic, and from_private_key, as that generates these automatically.
+    ///
+    /// However, if you'd really like to use these, go ahead.
     pub async fn generate_bearer(
         wallet: &Wallet<SigningKey>,
         duration_secs: Option<i64>,

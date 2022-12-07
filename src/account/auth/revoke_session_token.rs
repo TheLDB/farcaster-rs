@@ -3,9 +3,12 @@ use serde_json::{json, Value};
 use crate::{constants::merkle::API_ROOT, types::account::auth::secret::SecretToken, Farcaster};
 use chrono::Utc;
 use std::error::Error;
+use crate::types::account::auth::revoke::RevokedKeyRoot;
 
 impl Farcaster {
-    pub async fn revoke_session_token(token: &SecretToken) -> Result<(), Box<dyn Error>> {
+    /// Best not to use this function on its own, as the Account struct has a method that does this in a clean way
+    /// i.e. ``farcaster.account.revoke_auth_token().await?;``
+    pub async fn revoke_session_token(token: &SecretToken) -> Result<RevokedKeyRoot, Box<dyn Error>> {
         let payload: Value = json!({
             "method": "revokeToken",
             "params": {
@@ -13,9 +16,7 @@ impl Farcaster {
             }
         });
 
-        println!("{}", &token.secret);
-
-        let _revoke_reqwest = reqwest::Client::new()
+        let revoke_reqwest = reqwest::Client::new()
             .delete(format!("{}/v2/auth", API_ROOT))
             .header("Content-Type", "application/json")
             .header("Authorization", &token.secret)
@@ -25,10 +26,8 @@ impl Farcaster {
             .text()
             .await?;
 
-        println!("{:#?}", _revoke_reqwest);
+        let revoke: RevokedKeyRoot = serde_json::from_str(&revoke_reqwest)?;
 
-        // API not yet implemented- refer back when structure is available
-
-        Ok(())
+        Ok(revoke)
     }
 }

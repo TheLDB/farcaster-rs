@@ -8,6 +8,10 @@ use crate::{
 };
 
 impl Farcaster {
+    /// # Best not to use this function directly
+    /// Instead, use the [Account struct](../types/account/struct.Account.html) methods, such as from_mnemonic, and from_private_key, as that generates these automatically.
+    ///
+    /// However, if you'd really like to use these, go ahead.
     pub async fn get_session_token(
         bearer: &Bearer,
     ) -> Result<SecretToken, Box<dyn std::error::Error>> {

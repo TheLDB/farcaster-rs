@@ -35,9 +35,19 @@ use chrono::Utc;
 use ethers::signers::coins_bip39::English;
 use ethers::signers::{LocalWallet, MnemonicBuilder};
 use std::error::Error;
+use crate::types::account::auth::revoke::RevokedKeyRoot;
 
 impl Account {
-    /// create Farcaster account using mnemonic phrase
+    /// Initialize an account with a mnemonic phrase
+    ///
+    /// # Params
+    /// mnemonic_phrase: &str,
+    /// token_duration: Option<i64> - Defaults to 1hr
+    ///
+    /// # Example
+    /// ```no_run
+    /// let account = farcaster_rs::Account::from_mnemonic("phrase", None).await?;
+    /// ```
     pub async fn from_mnemonic(
         mnemonic_phrase: &str,
         token_duration: Option<i64>,
@@ -65,7 +75,16 @@ impl Account {
         Ok(account)
     }
 
-    /// create Farcaster account using private key
+    /// Initialize an account with a private key
+    ///
+    /// # Params:
+    /// key: &str,
+    /// token_duration: Option<i64> - Defaults to 1hr
+    ///
+    /// # Example
+    /// ```no_run
+    /// let account = farcaster_rs::Account::from_private_key("private key", None).await?;
+    /// ```
     pub async fn from_private_key(
         key: &str,
         token_duration: Option<i64>,
@@ -92,7 +111,7 @@ impl Account {
         Ok(account)
     }
 
-    /// returns authentication token
+    /// Get your authentication token
     pub fn get_auth_token(&self) -> Result<&str, Box<dyn Error>> {
         // prepare session token, if not ready
         if self.session_token.is_none() {
@@ -150,16 +169,15 @@ impl Account {
     }
 
     /// Revokes a specific session token
-    pub async fn revoke_auth_token(&mut self) -> Result<(), Box<dyn Error>> {
+    pub async fn revoke_auth_token(&mut self) -> Result<RevokedKeyRoot, Box<dyn Error>> {
         // Return error if no session token is present
         if self.session_token.is_none() {
             return Err(Box::from("No session token present"));
         }
 
-        let _revoke =
+        let revoke =
             crate::Farcaster::revoke_session_token(&self.session_token.as_ref().unwrap()).await?;
 
-        // Structure not build yet, therefore function not built yet.
-        Ok(())
+        Ok(revoke)
     }
 }

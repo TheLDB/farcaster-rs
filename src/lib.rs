@@ -20,7 +20,7 @@
 //!     let farcaster: Farcaster = Farcaster::new("node url", account).await?;
 //!
 //!     // Get Dan Romero's Casts with his Username, while specifying a limit, and a cursor
-//!     let casts = farcaster.get_casts_by_username("dwr", Some(5), none).await?;
+//!     let casts = farcaster.get_casts_by_username("dwr", Some(5), None).await?;
 //!
 //!     println!("{:#?}", casts);
 //!
@@ -29,8 +29,15 @@
 //! ```
 //! Quick explanation of all folders/modules in farcaster-rs
 //!
-//! # Documentation Notice
-//! Pretty much all documentation for functions is [here](./struct.Farcaster.html)
+//!
+//! ## If you're looking for authentication
+//! It's best to look in the [Account Struct](./types/account/struct.Account.html)
+//!
+//! ## If you're looking for most protocol-related functions
+//! It's best to look in the [Farcaster Struct](./struct.Farcaster.html)
+//!
+//! ## If you're looking to convert stuff like Username -> FID, FID -> Address, etc....
+//! It's best to look in the [Registry Struct](./types/registry/struct.Registry.html)
 //!
 //! ---------------
 //! ## `account`
