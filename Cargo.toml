@@ -1,6 +1,6 @@
 [package]
 name = "farcaster-rs"
-version = "0.1.0"
+version = "1.0.0"
 description="A simple rust crate to interface & interact with the Farcaster.xyz contracts & APIs"
 repository="https://github.com/TheLDB/farcaster-rs"
 authors=["Landon Boles"]

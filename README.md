@@ -23,7 +23,7 @@
 
 # 📜 Documentation
 
-## For extensive documentation, visit our [docs.rs page](https://docs.rs/farcaster-rs/0.1.0/farcaster_rs/)
+## For extensive documentation, visit our [docs.rs page](https://docs.rs/farcaster-rs/1.0.0/farcaster_rs/)
 
 <br />
 
@@ -34,7 +34,7 @@
 To get started, add the farcaster_rs crate to your `Cargo.toml` file
 
 ```toml
-farcaster_rs = "0.1.0"
+farcaster_rs = "1.0.0"
 ```
 
 Once you have the crate installed, you can start using the crate!
@@ -44,15 +44,26 @@ Once you have the crate installed, you can start using the crate!
 To connect to and use Farcaster API you need Ethereum provider HTTP endpoint along with mnemonic phrase
 or private key of an existing Farcaster account.
 
-```
-use farcaster_rs::{Account, Farcaster};
+```rust
+use farcaster_rs::{
+  Farcaster,
+  Account
+};
 
-let account = Account::from_mnemonic("top secret mnemonic phrase");
-let farcaster = Farcaster::new("https://ethereum.provider/api", account).await?;
-
-let landon = farcaster.get_user_by_username("lndnnft").await.unwrap();
-
-println!("{:#?}", landon);
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+  // Initialize a new Account with a phrase/private key and an optional key duration (defaults to 1 hour)
+  let account = Account::from_mnemonic("mnemonic phrase", None).await?;
+  
+  // Create a Farcaster connection
+  let farcaster = Farcaster::new("eth node", account).await?;
+  
+  let casts = farcaster.get_casts_by_username("lndnnft", None, None).await?;
+  
+  println!("{:#?}", casts);
+  
+  Ok(())
+}
 ```
 
 <br />
