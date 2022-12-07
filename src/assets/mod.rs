@@ -1,4 +1,4 @@
-//! The Assets module that handles authentication and tokens
+//! The Assets module that handles getting related NFT assets
 //!
 //! # Quickstart with the Assets module
 //!

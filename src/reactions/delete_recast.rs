@@ -5,6 +5,15 @@ use crate::Farcaster;
 use crate::types::reactions::deleted_recast::DeletedRecastRoot;
 
 impl Farcaster {
+    /// Delete a recast by the parent cast's hash
+    ///
+    /// # Params
+    /// cast_hash: &str
+    ///
+    /// # Example
+    /// ```no_run
+    /// let delete = farcaster.delete_recast_by_cast_hash("cast hash").await?;
+    /// ```
     pub async fn delete_recast_by_cast_hash(&self, cast_hash: &str) -> Result<DeletedRecastRoot, Box<dyn Error>> {
         let payload: Value = json!({
             "castHash": cast_hash

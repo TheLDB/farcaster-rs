@@ -5,6 +5,15 @@ use crate::Farcaster;
 use crate::types::follows::follow_user::FollowUserRoot;
 
 impl Farcaster {
+    /// Get a users followers via their FID
+    ///
+    /// # Params
+    /// fid: i64
+    ///
+    /// # Example
+    /// ```no_run
+    /// let follow = farcaster.follow_user_by_fid(0).await?;
+    /// ```
     pub async fn follow_user_by_fid(&self, fid: i64) -> Result<FollowUserRoot, Box<dyn Error>> {
         let payload: Value = json!({
             "targetFid": fid
@@ -26,6 +35,15 @@ impl Farcaster {
         Ok(follow)
     }
 
+    /// Get a users followers via their username
+    ///
+    /// # Params
+    /// username: &str
+    ///
+    /// # Example
+    /// ```no_run
+    /// let follow = farcaster.follow_user_by_username("abc").await?;
+    /// ```
     pub async fn follow_user_by_username(&self, username: &str) -> Result<FollowUserRoot, Box<dyn Error>> {
         let fid = &self.get_user_by_username(username).await?;
 
@@ -34,6 +52,15 @@ impl Farcaster {
         Ok(follow.clone())
     }
 
+    /// Get a users followers via their address
+    ///
+    /// # Params
+    /// address: &str
+    ///
+    /// # Example
+    /// ```no_run
+    /// let follow = farcaster.follow_user_by_address("0x000....").await?;
+    /// ```
     pub async fn follow_user_by_address(&self, address: &str) -> Result<FollowUserRoot, Box<dyn Error>> {
         let fid = &self.get_user_by_address(address).await?;
 

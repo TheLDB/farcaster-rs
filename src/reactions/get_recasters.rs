@@ -4,6 +4,17 @@ use crate::Farcaster;
 use crate::types::reactions::recasters::RecastersRoot;
 
 impl Farcaster {
+    /// Get recasters by cast hash
+    ///
+    /// # Params
+    /// cast_hash: &str,
+    /// limit: Option<i32> - Optional # of recasters to get (max 100)
+    /// cursor: Option<&str) - Optional cursor for pagination
+    ///
+    /// # Example
+    /// ```no_run
+    /// let recasters = farcaster.get_recasters.by_cast_hash("cast hash", None, None).await?;
+    /// ```
     pub async fn get_recasters_by_cast_hash(&self, cast_hash: &str, limit: Option<i32>, cursor: Option<&str>) -> Result<RecastersRoot, Box<dyn Error>> {
         let mut url = format!("{}/v2/cast-recasters?castHash={}", API_ROOT, cast_hash);
 

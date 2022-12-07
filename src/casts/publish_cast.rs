@@ -6,6 +6,19 @@ use chrono::offset::Utc;
 use serde_json::{json, Value};
 
 impl Farcaster {
+    /// Publish a cast to the protocol
+    /// ```no_run
+    /// use farcaster_rs::{Account, Farcaster};
+    ///
+    /// let account: Account = Account::from_mnemonic("mnemonic phrase", None).await?;
+    /// let farcaster: Farcaster = Farcaster::new("eth provider", account).await?;
+    ///
+    /// // Publish a cast.
+    /// // 1st Param: Content
+    /// // 2nd & 3rd Param: Parent Cast Hash & Parent User FID
+    ///     // Used for replying to a cast
+    /// let cast = farcaster.publish_cast("cast content", Some("optional parent hash to reply to"), Some(0)).await?;
+    /// ```
     pub async fn publish_cast(
         &self,
         content: &str,

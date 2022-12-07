@@ -5,6 +5,15 @@ use crate::Farcaster;
 use crate::types::reactions::recasted::RecastedRoot;
 
 impl Farcaster {
+    /// Recast a cast by its hash
+    ///
+    /// # Params
+    /// cast_hash: &str
+    ///
+    /// # Example
+    /// ```no_run
+    /// let recast = farcaster.recast_by_cast_hash("cast hash").await?;
+    /// ```
     pub async fn recast_by_cast_hash(&self, cast_hash: &str) -> Result<RecastedRoot, Box<dyn Error>> {
         let payload: Value = json!({
             "castHash": cast_hash

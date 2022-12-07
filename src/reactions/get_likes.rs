@@ -4,6 +4,17 @@ use crate::Farcaster;
 use crate::types::reactions::liked_casts::ManyLikedCastsRoot;
 
 impl Farcaster {
+    /// Get likes by the cast hash
+    ///
+    /// # Params
+    /// cast_hash: &str
+    /// limit: Option<i32> - Optional # of likes to get (max 100)
+    /// cursor: Option<&str> - Optional cursor for pagination
+    ///
+    /// # Example
+    /// ```no_run
+    /// farcaster.get_likes_by_cast_hash("cast hash", None, None).await?;
+    /// ```
     pub async fn get_likes_by_cast_hash(&self, cast_hash: &str, limit: Option<i32>, cursor: Option<&str>) -> Result<ManyLikedCastsRoot, Box<dyn Error>> {
         let mut url = format!("{}/v2/cast-likes?castHash={}", API_ROOT, cast_hash);
 

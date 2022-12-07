@@ -4,6 +4,16 @@ use crate::Farcaster;
 use crate::types::notifications::notifications::NotificationsRoot;
 
 impl Farcaster {
+    /// Fetch your notifications
+    ///
+    /// # Params
+    /// limit: Option<i64> - How many casts to get (max 100)
+    /// cursor: Option<&str) - For pagination
+    ///
+    /// # Example
+    /// ```no_run
+    /// let notifications = farcaster.get_notifications(None, None).await?;
+    /// ```
     pub async fn get_notifications(&self, limit: Option<i64>, cursor: Option<&str>) -> Result<NotificationsRoot, Box<dyn Error>> {
         let mut url = format!("{}/v2/mention-and-reply-notifications", API_ROOT);
 

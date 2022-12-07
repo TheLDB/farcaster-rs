@@ -5,6 +5,15 @@ use crate::Farcaster;
 use crate::types::casts::deleted_cast::DeletedCastRoot;
 
 impl Farcaster {
+    /// Delete a cast via its hash
+    ///
+    /// ## Params
+    /// cast_hash: &str
+    ///
+    /// ## Example
+    /// ```no_run
+    /// let casts = farcaster.delete_cast_by_cast_hash("cast_hash").await?;
+    /// ```
     pub async fn delete_cast_by_cast_hash(&self, cast_hash: &str) -> Result<DeletedCastRoot, Box<dyn Error>> {
         let payload: Value = json!({
             "castHash": cast_hash

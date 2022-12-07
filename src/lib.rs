@@ -29,6 +29,10 @@
 //! ```
 //! Quick explanation of all folders/modules in farcaster-rs
 //!
+//! # Documentation Notice
+//! Pretty much all documentation for functions is [here](./struct.Farcaster.html)
+//!
+//! ---------------
 //! ## `account`
 //! The account module handles authentication w/ the Farcaster Merkle APIs. Generating tokens, revoking tokens, etc....
 //! View documentation [here](./account/index.html)
