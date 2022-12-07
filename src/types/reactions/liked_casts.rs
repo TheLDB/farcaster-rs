@@ -1,34 +1,28 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct CastRoot {
-    pub result: Result,
-    pub next: Option<Next>,
+pub struct ManyLikedCastsRoot {
+    pub result: LikedCastResult
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Result {
-    pub casts: Vec<Cast>,
+pub struct LikedCastResult {
+    pub likes: Vec<Like>
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Cast {
+pub struct Like {
+    #[serde(rename="type")]
+    pub like_type: String,
     pub hash: String,
-    #[serde(rename="threadHash")]
-    pub thread_hash: String,
-    pub author: Author,
-    pub text: String,
+    pub reactor: Reactor,
     pub timestamp: i64,
-    pub replies: Replies,
-    pub reactions: Reactions,
-    pub recasts: Recasts,
-    pub watches: Watches,
-    #[serde(rename="viewerContext")]
-    pub viewer_context: ViewerContext
+    #[serde(rename="castHash")]
+    pub cast_hash: String
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Author {
+pub struct Reactor {
     pub fid: i64,
     pub username: String,
     #[serde(rename="displayName")]
@@ -38,13 +32,17 @@ pub struct Author {
     #[serde(rename="followerCount")]
     pub follower_count: i64,
     #[serde(rename="followingCount")]
-    pub following_count: i64
+    pub following_count: i64,
+    #[serde(rename="referrerUsername")]
+    pub referrer_username: Option<String>,
+    #[serde(rename="viewerContext")]
+    pub viewer_context: ViewerContext
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PFP {
     pub url: String,
-    pub verified: bool,
+    pub verified: bool
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -59,32 +57,8 @@ pub struct Bio {
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Replies {
-
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Reactions {
-
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Recasts {
-
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Watches {
-
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ViewerContext {
-
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Next {
-    pub cursor: Option<String>,
+    pub following: bool,
+    #[serde(rename="followedBy")]
+    pub followed_by: bool
 }

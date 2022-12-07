@@ -13,6 +13,8 @@ impl Farcaster {
             }
         });
 
+        println!("{}", &token.secret);
+
         let _revoke_reqwest = reqwest::Client::new()
             .delete(format!("{}/v2/auth", API_ROOT))
             .header("Content-Type", "application/json")
@@ -22,6 +24,7 @@ impl Farcaster {
             .await?
             .text()
             .await?;
+
 
         println!("{:#?}", _revoke_reqwest);
 

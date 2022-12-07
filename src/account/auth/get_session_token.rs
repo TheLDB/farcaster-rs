@@ -24,7 +24,7 @@ impl Farcaster {
             .await?;
 
         let mut secret: Secret = serde_json::from_str(&session_reqwest)?;
-        secret.result.token.secret = format!("Bearer: {}", secret.result.token.secret);
+        secret.result.token.secret = format!("Bearer {}", secret.result.token.secret);
 
         Ok(secret.result.token)
     }

@@ -100,11 +100,16 @@ impl Account {
         Ok(())
     }
 
-
     /// Function to regenete your session token.
     /// Ideal for bots. Regenerate every hour to secure your token.
-    pub async fn regen_session_token(&mut self, token_duration: Option<i64>) -> Result<(), Box<dyn Error>> {
-        let token_duration_secs = token_duration.unwrap_or(self.token_duration_secs.unwrap_or(AUTH_TOKEN_DEFAULT_DURATION_SECS));
+    pub async fn regen_session_token(
+        &mut self,
+        token_duration: Option<i64>,
+    ) -> Result<(), Box<dyn Error>> {
+        let token_duration_secs = token_duration.unwrap_or(
+            self.token_duration_secs
+                .unwrap_or(AUTH_TOKEN_DEFAULT_DURATION_SECS),
+        );
 
         self.bearer_token =
             Some(crate::Farcaster::generate_bearer(&self.wallet, Some(token_duration_secs)).await?);

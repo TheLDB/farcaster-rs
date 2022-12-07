@@ -2,13 +2,11 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
 pub struct PublishedCast {
     pub result: Result,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
 pub struct Result {
     pub cast: Cast,
 }
@@ -20,7 +18,7 @@ pub struct Cast {
     pub thread_hash: String,
     pub author: Author,
     pub text: String,
-    pub published_at: i64,
+    pub timestamp: i64,
     pub replies: Replies,
     pub reactions: Reactions,
     pub recasts: Recasts,

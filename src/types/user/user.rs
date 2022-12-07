@@ -22,7 +22,7 @@ pub struct UserInfo {
     #[serde(rename = "followingCount")]
     pub following_count: i64,
     #[serde(rename = "referrerUsername")]
-    pub referrer_username: String,
+    pub referrer_username: Option<String>,
     #[serde(rename = "viewerContext")]
     pub viewer_content: ViewerContext,
 }
