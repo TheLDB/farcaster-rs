@@ -4,28 +4,18 @@ use crate::types::shared::shared_profile::SharedProfile;
 use crate::types::shared::viewer_context::SharedViewerContext;
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct ManyLikedCastsRoot {
-    pub result: LikedCastResult
+pub struct FollowersRoot {
+    pub result: FollowersUsersVec,
+    pub next: Option<FollowersNext>
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct LikedCastResult {
-    pub likes: Vec<Like>
+pub struct FollowersUsersVec {
+    pub users: Vec<Follower>
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Like {
-    #[serde(rename="type")]
-    pub like_type: String,
-    pub hash: String,
-    pub reactor: Reactor,
-    pub timestamp: i64,
-    #[serde(rename="castHash")]
-    pub cast_hash: String
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Reactor {
+pub struct Follower {
     pub fid: i64,
     pub username: String,
     #[serde(rename="displayName")]
@@ -36,8 +26,10 @@ pub struct Reactor {
     pub follower_count: i64,
     #[serde(rename="followingCount")]
     pub following_count: i64,
-    #[serde(rename="referrerUsername")]
-    pub referrer_username: Option<String>,
     #[serde(rename="viewerContext")]
     pub viewer_context: SharedViewerContext
+}
+
+pub struct FollowersNext {
+    pub cursor: Option<String>
 }

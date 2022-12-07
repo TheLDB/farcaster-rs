@@ -1,4 +1,7 @@
 use serde::{Deserialize, Serialize};
+use crate::types::shared::pfp::SharedPfp;
+use crate::types::shared::shared_profile::SharedProfile;
+use crate::types::shared::viewer_context::SharedViewerContext;
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct LikedCastRoot {
@@ -27,8 +30,8 @@ pub struct Reactor {
     pub username: String,
     #[serde(rename="displayName")]
     pub display_name: String,
-    pub pfp: PFP,
-    pub profile: Profile,
+    pub pfp: SharedPfp,
+    pub profile: SharedProfile,
     #[serde(rename="followerCount")]
     pub follower_count: i64,
     #[serde(rename="followingCount")]
@@ -36,29 +39,5 @@ pub struct Reactor {
     #[serde(rename="referrerUsername")]
     pub referrer_username: Option<String>,
     #[serde(rename="viewerContext")]
-    pub viewer_context: ViewerContext
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct PFP {
-    pub url: String,
-    pub verified: bool
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Profile {
-    pub bio: Bio
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Bio {
-    pub text: String,
-    pub mentions: Option<Vec<String>>
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct ViewerContext {
-    pub following: bool,
-    #[serde(rename="followedBy")]
-    pub followed_by: bool
+    pub viewer_context: SharedViewerContext
 }

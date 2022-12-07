@@ -20,3 +20,11 @@ pub mod registry;
 /// ## Reactions
 /// Holds types for reaction events
 pub mod reactions;
+
+/// ## Follows
+/// Holds types for followers/following
+pub mod follows;
+
+/// ## Shared
+/// Contains shared types i.e. Profile, Pfp, etc....
+pub mod shared;

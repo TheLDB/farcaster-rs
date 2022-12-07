@@ -1,4 +1,7 @@
 use serde::{Deserialize, Serialize};
+use crate::types::shared::pfp::SharedPfp;
+use crate::types::shared::shared_profile::SharedProfile;
+use crate::types::shared::viewer_context::SharedViewerContext;
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct RecastersRoot {
@@ -16,36 +19,12 @@ pub struct Recaster {
     pub username: String,
     #[serde(rename="displayName")]
     pub display_name: String,
-    pub pfp: Pfp,
-    pub profile: Profile,
+    pub pfp: SharedPfp,
+    pub profile: SharedProfile,
     #[serde(rename="followerCount")]
     pub follower_count: i64,
     #[serde(rename="followingCount")]
     pub following_count: i64,
     #[serde(rename="ViewerContext")]
-    pub viewer_context: ViewerContext
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Pfp {
-    pub url: String,
-    pub verified: bool
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Profile {
-    pub bio: Bio
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Bio {
-    pub text: String,
-    pub mentions: Option<Vec<String>>
-}
-
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct ViewerContext {
-    pub following: bool,
-    #[serde(rename="followedBy")]
-    pub followed_by: bool
+    pub viewer_context: SharedViewerContext
 }
