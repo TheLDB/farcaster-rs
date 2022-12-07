@@ -7,6 +7,8 @@ pub mod types;
 pub mod users;
 pub mod reactions;
 pub mod follows;
+pub mod verifications;
+
 
 pub use types::account::Account;
 pub use types::registry::Registry;

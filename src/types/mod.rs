@@ -25,3 +25,7 @@ pub mod follows;
 /// ## Shared
 /// Contains shared types i.e. Profile, Pfp, etc....
 pub mod shared;
+
+/// ## Verifications
+/// Contains types relating to cryptographic proofs & verifications
+pub mod verifications;
