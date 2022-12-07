@@ -1,3 +1,32 @@
+//! The Account module that handles authentication and tokens
+//!
+//! # Quickstart with the Account module
+//!
+//! 1. Use the from_mnemonic function as defined in the [Account struct](../types/account/struct.Account.html)
+//! ```no_run
+//! use farcaster_rs::Account;
+//! // Takes a mnemonic phrase and a token duration (defaults to 1 hour)
+//! let account: Account = Account::from_mnemonic("mnemonic phrase", None).await?;
+//! ```
+//!
+//! 2. Use the from_private_key function as defined in the [Account struct](../types/account/struct.Account.html)
+//! ```no_run
+//! use farcaster_rs::Account;
+//! // Takes a mnemonic phrase and a token duration (defaults to 1 hour)
+//! let account: Account = Account::from_private_key("private key", None).await?;
+//! ```
+//!
+//! 3. Regenerate your session token as defined in the [Account struct](../types/account/struct.Account.html)
+//! ```no_run
+//! use farcaster_rs::{Account, Farcaster};
+//! // Takes a mnemonic phrase and a token duration (defaults to 1 hour)
+//! let account: Account = Account::from_mnemonic("mnemonic phrase", None).await?;
+//! let mut farcaster: Farcaster = Farcaster::new("eth provider", account).await?;
+//!
+//! // Regenerate your session token with an optional new token duration (defaults to either your previously set token duration, or the default 1 hour)
+//! farcaster.account.regen_session_token(None);
+//! ```
+
 pub mod auth;
 
 use crate::constants::merkle::AUTH_TOKEN_DEFAULT_DURATION_SECS;

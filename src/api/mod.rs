@@ -1,3 +1,5 @@
+//! The API module that has internal functions for wrappers and such
+
 use crate::Farcaster;
 use std::error::Error;
 

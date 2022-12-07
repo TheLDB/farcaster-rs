@@ -4,7 +4,7 @@ use crate::Farcaster;
 use crate::types::assets::collection_owners::CollectionOwnersRoot;
 
 impl Farcaster {
-    pub async fn get_collection_owners(&self, collection_id: String, limit: Option<i64>, cursor: Option<String>) -> Result<CollectionOwnersRoot, Box<dyn Error>> {
+    pub async fn get_collection_owners(&self, collection_id: &str, limit: Option<i64>, cursor: Option<String>) -> Result<CollectionOwnersRoot, Box<dyn Error>> {
         let mut url = format!("{}/v2/collection-owners?collectionid={}", API_ROOT, collection_id);
 
         if limit.is_some() {
