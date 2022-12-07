@@ -27,5 +27,5 @@
 //! let collections_owners = farcaster.get_collection_owners("collectionID", None, None).await?;
 //! ```
 
-pub mod get_user_collections;
 pub mod get_collection_owners;
+pub mod get_user_collections;

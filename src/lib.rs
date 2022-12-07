@@ -77,20 +77,19 @@
 //! The verifications module holds functions relating to cryptographic proofs such as getting verified address'
 //! //! View documentation [here](./verifications/index.html)
 
-
 pub mod account;
 pub mod api;
+pub mod assets;
 pub mod casts;
 pub mod constants;
+pub mod follows;
+pub mod misc;
+pub mod notifications;
+pub mod reactions;
 pub mod registry;
 pub mod types;
 pub mod users;
-pub mod reactions;
-pub mod follows;
 pub mod verifications;
-pub mod notifications;
-pub mod assets;
-pub mod misc;
 
 pub use types::account::Account;
 pub use types::registry::Registry;

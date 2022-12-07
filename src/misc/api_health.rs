@@ -1,6 +1,6 @@
-use std::error::Error;
 use crate::constants::merkle::API_ROOT;
 use crate::Farcaster;
+use std::error::Error;
 
 impl Farcaster {
     pub async fn get_api_health() -> Result<String, Box<dyn Error>> {

@@ -43,6 +43,8 @@
 //! let delete_cast = farcaster.delete_cast_by_cast_hash("cast hash").await?;
 //! ```
 
+pub mod delete_cast;
+pub mod get_casts;
 /// Publish a cast to the protocol
 /// ```no_run
 /// use farcaster_rs::{Account, Farcaster};
@@ -57,5 +59,3 @@
 /// let cast = farcaster.publish_cast("cast content", Some("optional parent hash to reply to"), Some(0)).await?;
 /// ```
 pub mod publish_cast;
-pub mod get_casts;
-pub mod delete_cast;

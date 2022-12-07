@@ -25,7 +25,6 @@ impl Farcaster {
             .text()
             .await?;
 
-
         println!("{:#?}", _revoke_reqwest);
 
         // API not yet implemented- refer back when structure is available

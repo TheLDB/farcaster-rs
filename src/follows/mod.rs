@@ -57,9 +57,9 @@
 
 /// Follow a user
 pub mod follow_user;
-/// Unfollow a user
-pub mod unfollow_user;
-/// Get followers
-pub mod get_followers;
 /// Get following
 pub mod following;
+/// Get followers
+pub mod get_followers;
+/// Unfollow a user
+pub mod unfollow_user;

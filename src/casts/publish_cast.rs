@@ -1,7 +1,6 @@
 use crate::constants::merkle::API_ROOT;
 use crate::types::casts::published_cast::PublishedCast;
 use crate::Farcaster;
-use chrono::offset::Utc;
 
 use serde_json::{json, Value};
 
@@ -23,7 +22,7 @@ impl Farcaster {
         &self,
         content: &str,
         reply_to_hash: Option<&str>,
-        reply_to_fid: Option<i64>
+        reply_to_fid: Option<i64>,
     ) -> Result<PublishedCast, Box<dyn std::error::Error>> {
         let payload: Value;
 
@@ -38,11 +37,8 @@ impl Farcaster {
                 },
                 "text": content
             })
-        }
-        else {
-            payload = json!({
-                "text": content
-            })
+        } else {
+            payload = json!({ "text": content })
         }
 
         let publish_cast_reqwest = reqwest::Client::new()

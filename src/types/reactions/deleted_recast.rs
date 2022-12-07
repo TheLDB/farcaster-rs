@@ -2,10 +2,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct DeletedRecastRoot {
-    pub result: DeletedRecastResult
+    pub result: DeletedRecastResult,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct DeletedRecastResult {
-    pub success: bool
+    pub success: bool,
 }

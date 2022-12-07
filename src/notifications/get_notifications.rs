@@ -1,7 +1,7 @@
-use std::error::Error;
 use crate::constants::merkle::API_ROOT;
-use crate::Farcaster;
 use crate::types::notifications::notifications::NotificationsRoot;
+use crate::Farcaster;
+use std::error::Error;
 
 impl Farcaster {
     /// Fetch your notifications
@@ -14,7 +14,11 @@ impl Farcaster {
     /// ```no_run
     /// let notifications = farcaster.get_notifications(None, None).await?;
     /// ```
-    pub async fn get_notifications(&self, limit: Option<i64>, cursor: Option<&str>) -> Result<NotificationsRoot, Box<dyn Error>> {
+    pub async fn get_notifications(
+        &self,
+        limit: Option<i64>,
+        cursor: Option<&str>,
+    ) -> Result<NotificationsRoot, Box<dyn Error>> {
         let mut url = format!("{}/v2/mention-and-reply-notifications", API_ROOT);
 
         if limit.is_some() {

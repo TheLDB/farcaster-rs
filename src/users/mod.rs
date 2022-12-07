@@ -39,9 +39,9 @@
 //! let me = farcaster.get_me().await?;
 //! ```
 
-/// Get a user by FID, Address, or Username
-pub mod get_user;
 /// Get a custody address by FID, Address, or Username
 pub mod get_custody_address;
+/// Get a user by FID, Address, or Username
+pub mod get_user;
 /// Get info about the authenticated user
 pub mod me;
