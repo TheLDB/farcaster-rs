@@ -9,6 +9,7 @@ pub mod reactions;
 pub mod follows;
 pub mod verifications;
 pub mod notifications;
+pub mod assets;
 
 pub use types::account::Account;
 pub use types::registry::Registry;

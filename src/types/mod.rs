@@ -33,3 +33,7 @@ pub mod verifications;
 /// ## Notifications
 /// Contains types relating to notifications
 pub mod notifications;
+
+/// ## Assets
+/// Contains types relating to NFT assets
+pub mod assets;
