@@ -30,12 +30,12 @@
 pub mod auth;
 
 use crate::constants::merkle::AUTH_TOKEN_DEFAULT_DURATION_SECS;
+use crate::types::account::auth::revoke::RevokedKeyRoot;
 use crate::types::account::Account;
 use chrono::Utc;
 use ethers::signers::coins_bip39::English;
 use ethers::signers::{LocalWallet, MnemonicBuilder};
 use std::error::Error;
-use crate::types::account::auth::revoke::RevokedKeyRoot;
 
 impl Account {
     /// Initialize an account with a mnemonic phrase
