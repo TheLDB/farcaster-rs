@@ -23,7 +23,7 @@
 
 # 📜 Documentation
 
-## For extensive documentation, visit our [docs.rs page](https://docs.rs/farcaster-rs/1.0.0/farcaster_rs/)
+## For extensive documentation, visit our [docs.rs page](https://docs.rs/farcaster-rs/1.0.1/farcaster_rs/)
 
 <br />
 
@@ -34,7 +34,7 @@
 To get started, add the farcaster_rs crate to your `Cargo.toml` file
 
 ```toml
-farcaster_rs = "1.0.0"
+farcaster_rs = "1.0.1"
 ```
 
 Once you have the crate installed, you can start using the crate!
